@@ -14,7 +14,10 @@ namespace QuanLyNhanSu.Module.BusinessObjects
     [Persistent(@"GioCong")]
     [XafDisplayName("Bảng Giờ Công")]
     [XafDefaultProperty("nguoiChamCong")]
-    [Appearance("soLanDiTre", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "soLanDiTre", Criteria = "soLanDiTre != 0")]
+    [Appearance("diTreSang", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianVaoCa", Criteria = "diTreSang = true")]
+    [Appearance("diTreChieu", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianVaoGiuaCa", Criteria = "diTreChieu = true")]
+    [Appearance("veSomSang", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianRaGiuaCa", Criteria = "veSomSang = true")]
+    [Appearance("veSomChieu", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianTanCa", Criteria = "veSomChieu = true")]
     [Appearance("soLanVeSom", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "soLanVeSom", Criteria = "soLanVeSom != 0")]
     [Appearance("duyetTangCa", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "soGioTangCa", Criteria = "duyetTangCa = false")]
     public class GioCong : XPLiteObject
@@ -27,7 +30,26 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         protected override void OnLoaded()
         {
             base.OnLoaded();
+            this.thoiGianVaoCaSaved = this.thoiGianVaoCa;
+            this.thoiGianRaGiuaCaSaved = this.thoiGianRaGiuaCa;
+            this.fThoiGianVaoGiuaCaSaved = this.thoiGianVaoGiuaCa;
+            this.thoiGianTanCaSaved = this.thoiGianTanCa;
+            this.soGioCoBanSaved = this.soGioCoBan;
+            this.soGioDiTreSaved = this.soGioDiTre;
+            this.soGioVeSomSaved = this.soGioVeSom;
+            this.soGioDauCaSaved = this.soGioDauCa;
+            this.soGioCuoiCaSaved = this.soGioCuoiCa;
             Session.CommitTransaction();
+        }
+        protected override void EndEdit()
+        {
+            base.EndEdit();
+            GioCong.AutoSaveOnEndEdit = true;
+        }
+        protected override void OnChanged(string propertyName, object oldValue, object newValue)
+        {
+            base.OnChanged(propertyName, oldValue, newValue);
+            AutoSaveOnEndEdit = true;
         }
         int fId;
         [Key(true)]
@@ -98,6 +120,51 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             get => fThoiGianTanCaSaved;
             set => SetPropertyValue("thoiGianTanCaSaved", ref fThoiGianTanCaSaved, value);
         }
+        double? fSoGioCoBanSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? soGioCoBanSaved
+        {
+            get => fSoGioCoBanSaved;
+            set => SetPropertyValue("soGioCoBanSaved", ref fSoGioCoBanSaved, value);
+        }
+        double? fSoGioDiTreSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? soGioDiTreSaved
+        {
+            get => fSoGioDiTreSaved;
+            set => SetPropertyValue("soGioDiTreSaved", ref fSoGioDiTreSaved, value);
+        }
+        double? fSoGioVeSomSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? soGioVeSomSaved
+        {
+            get => fSoGioVeSomSaved;
+            set => SetPropertyValue("soGioVeSomSaved", ref fSoGioVeSomSaved, value);
+        }
+        double? fSoGioDauCaSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? soGioDauCaSaved
+        {
+            get => fSoGioDauCaSaved;
+            set => SetPropertyValue("soGioDauCaSaved", ref fSoGioDauCaSaved, value);
+        }
+        double? fSoGioCuoiCaSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? soGioCuoiCaSaved
+        {
+            get => fSoGioCuoiCaSaved;
+            set => SetPropertyValue("soGioCuoiCaSaved", ref fSoGioCuoiCaSaved, value);
+        }
         [XafDisplayName("Thời Gian Vào Ca")]
         [ModelDefault("DisplayFormat", "{0:HH:mm}")]
         [ModelDefault("EditMask", "{HH:mm}")]
@@ -105,7 +172,7 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                if(!Equals(this.thoiGianVaoCaSaved,null))
+                if (!Equals(this.thoiGianVaoCaSaved, null))
                 {
                     return this.thoiGianVaoCaSaved;
                 }
@@ -113,39 +180,19 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 {
                     if (!Equals(this.nguoiChamCong, null))
                     {
-                        List<CheckInOut> thoiGianVaoCas = new List<CheckInOut>();
-                        DateTime thoiGianVaoHopLe = this.nguoiChamCong.caLamViec.thoiGianVao;
-                        foreach (CheckInOut checkInOut in this.checkInOuts)
+                        IEnumerable<CheckInOut> gioVaoCa = this.checkInOuts.Where(p => p.loaiChamCong == CheckInOut.LoaiGio.vaodauca);
+                        if (gioVaoCa.Min() != null)
                         {
-                            if ((checkInOut.GioCham.Hour >= (thoiGianVaoHopLe.Hour - 1)) && (checkInOut.GioCham.Hour <= (thoiGianVaoHopLe.Hour + 1)))
-                            {
-                                thoiGianVaoCas.Add(checkInOut);
-                            }
+                            return gioVaoCa.Min().GioCham;
                         }
-                        if (thoiGianVaoCas != null)
-                        {
-                            CheckInOut checkIn = thoiGianVaoCas.FirstOrDefault();
-                            if (checkIn != null)
-                            {
-                                this.thoiGianVaoCaSaved = checkIn.GioCham;
-                                return checkIn.GioCham;
-                            }
-                            else
-                            {
-                                return null;
-                            }
-                        }
-                        else
-                        {
-                            return null;
-                        }
+                        else return null;
                     }
                     else
                     {
                         return null;
                     }
                 }
-                
+
             }
         }
         [XafDisplayName("Thời Gian Ra Giữa Ca")]
@@ -155,7 +202,7 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                if(!Equals(this.thoiGianRaGiuaCaSaved,null))
+                if (!Equals(this.thoiGianRaGiuaCaSaved, null))
                 {
                     return this.thoiGianRaGiuaCaSaved;
                 }
@@ -163,42 +210,18 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 {
                     if (!Equals(this.nguoiChamCong, null))
                     {
-                        List<CheckInOut> thoiGianRaGiuaCas = new List<CheckInOut>();
-                        DateTime thoiGianRaHopLe = this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa;
-                        /*Lọc Danh Sách Các Lần chấm Công Hợp Lệ Trong Khung Giờ Quy Định*/
-                        foreach (CheckInOut checkInOut in this.checkInOuts)
+                        IEnumerable<CheckInOut> gioRaGiuaCa = this.checkInOuts.Where(p => p.loaiChamCong == CheckInOut.LoaiGio.ravaogiuaca);
+                        if (gioRaGiuaCa.Min() != null)
                         {
-                            if ((checkInOut.GioCham.Hour >= (thoiGianRaHopLe.Hour - 1)) && (checkInOut.GioCham.Hour <= (thoiGianRaHopLe.Hour + 1)))
-                            {
-                                thoiGianRaGiuaCas.Add(checkInOut);
-                            }
+                            return gioRaGiuaCa.Min().GioCham;
                         }
-                        /*Trả Về Lần Quẹt Sớm Nhất*/
-                        if (thoiGianRaGiuaCas != null)
-                        {
-                            CheckInOut checkIn = thoiGianRaGiuaCas.FirstOrDefault();
-                            if (checkIn != null)
-                            {
-                                this.thoiGianRaGiuaCaSaved = checkIn.GioCham;
-                                //Session.CommitTransaction();
-                                return checkIn.GioCham;
-                            }
-                            else
-                            {
-                                return null;
-                            }
-                        }
-                        else
-                        {
-                            return null;
-                        }
+                        else return null;
                     }
                     else
                     {
                         return null;
                     }
                 }
-                
             }
         }
         [XafDisplayName("Thời Gian Vào Giữa Ca")]
@@ -208,7 +231,7 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                if(!Equals(this.thoiGianVaoGiuaCaSaved,null))
+                if (!Equals(this.thoiGianVaoGiuaCaSaved, null))
                 {
                     return this.thoiGianVaoGiuaCaSaved;
                 }
@@ -216,32 +239,12 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 {
                     if (!Equals(this.nguoiChamCong, null))
                     {
-                        List<CheckInOut> thoiGianVaoGiuaCas = new List<CheckInOut>();
-                        DateTime thoiGianVaoGiuaCaHopLe = this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa;
-                        foreach (CheckInOut checkInOut in this.checkInOuts)
+                        IEnumerable<CheckInOut> gioVaoGiuaCa = this.checkInOuts.Where(p => p.loaiChamCong == CheckInOut.LoaiGio.ravaogiuaca);
+                        if (gioVaoGiuaCa.Max() != null)
                         {
-                            if ((checkInOut.GioCham.Hour >= (thoiGianVaoGiuaCaHopLe.Hour - 2)) && (checkInOut.GioCham.Hour <= (thoiGianVaoGiuaCaHopLe.Hour + 1)))
-                            {
-                               thoiGianVaoGiuaCas.Add(checkInOut);
-                            }
+                            return gioVaoGiuaCa.Max().GioCham;
                         }
-                        if (thoiGianVaoGiuaCas != null)
-                        {
-                            CheckInOut checkIn = thoiGianVaoGiuaCas.LastOrDefault();
-                            if (checkIn != null)
-                            {
-                                this.thoiGianVaoGiuaCaSaved = checkIn.GioCham;
-                                return checkIn.GioCham;
-                            }
-                            else
-                            {
-                                return null;
-                            }
-                        }
-                        else
-                        {
-                            return null;
-                        }
+                        else return null;
                     }
                     else
                     {
@@ -256,8 +259,8 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         public DateTime? thoiGianTanCa
         {
             get
-            { 
-                if(!Equals(this.thoiGianTanCaSaved,null))
+            {
+                if (!Equals(this.thoiGianTanCaSaved, null))
                 {
                     return this.thoiGianTanCaSaved;
                 }
@@ -265,35 +268,12 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 {
                     if (!Equals(this.nguoiChamCong, null))
                     {
-                        List<CheckInOut> thoiGianTanCas = new List<CheckInOut>();
-                        DateTime thoiGianTanCaHopLe = this.nguoiChamCong.caLamViec.thoiGianTanCa;
-                        /*Lọc Danh Sách Các Lần chấm Công Hợp Lệ Trong Khung Giờ Quy Định*/
-                        foreach (CheckInOut checkInOut in this.checkInOuts)
+                        IEnumerable<CheckInOut> gioTanCa = this.checkInOuts.Where(p => p.loaiChamCong == CheckInOut.LoaiGio.tanca);
+                        if (gioTanCa.Min() != null)
                         {
-                            if ((checkInOut.GioCham.Hour >= (thoiGianTanCaHopLe.Hour - 1)) && (checkInOut.GioCham.Hour <= (thoiGianTanCaHopLe.Hour + 5)))
-                            {
-                                thoiGianTanCas.Add(checkInOut);
-                            }
+                            return gioTanCa.Min().GioCham;
                         }
-                        /*Trả Về Lần Quẹt Trễ Nhất*/
-                        if (thoiGianTanCas != null)
-                        {
-                            CheckInOut checkIn = thoiGianTanCas.LastOrDefault();
-                            if (checkIn != null)
-                            {
-                                this.thoiGianTanCaSaved = checkIn.GioCham;
-                                Session.CommitTransaction();
-                                return checkIn.GioCham;
-                            }
-                            else
-                            {
-                                return null;
-                            }
-                        }
-                        else
-                        {
-                            return null;
-                        }
+                        else return null;
                     }
                     else
                     {
@@ -302,37 +282,91 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 }
             }
         }
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? soGioDauCa
+        {
+            get
+            {
+                if (!Equals(this.soGioDauCaSaved, null) && this.soGioDauCaSaved != 0)
+                {
+                    return this.soGioDauCaSaved;
+                }
+                else
+                {
+                    double soGio = 0;
+                    if ((!Equals(this.thoiGianVaoCa, null)) && (!Equals(this.thoiGianRaGiuaCa, null)))
+                    {
+                        soGio = tinhSoGioCong(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, (DateTime)this.thoiGianRaGiuaCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianVao, (DateTime)this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
+                    }
+                    return soGio;
+                }
+            }
+        }
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? soGioCuoiCa
+        {
+            get
+            {
+                if (!Equals(this.soGioCuoiCaSaved, null) && this.soGioCuoiCaSaved != 0)
+                {
+                    return this.soGioCuoiCaSaved;
+                }
+                else
+                {
+                    double soGio = 0;
+                    if ((!Equals(this.thoiGianVaoGiuaCa, null)) && (!Equals(this.thoiGianTanCa, null)))
+                    {
+                        soGio = tinhSoGioCong(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, (DateTime)this.thoiGianTanCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianTanCa);
+                    }
+                    return soGio;
+                }
+            }
+        }
         [XafDisplayName("Số Giờ Cơ Bản")]
         public double? soGioCoBan
         {
             get
             {
-                double soGioDauCa = 0;
-                double soGioCuoiCa = 0;
-                if ((!Equals(this.thoiGianVaoCa,null)) && (!Equals(this.thoiGianRaGiuaCa,null)))
-                {
-                    soGioDauCa = tinhSoGioCongDauCa(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, (DateTime)this.thoiGianRaGiuaCa);
-                }
-                if((!Equals(this.thoiGianVaoGiuaCa,null)) && (!Equals(this.thoiGianTanCa,null)))
-                {
-                    soGioCuoiCa = tinhSoGioCongCuoiCa(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, (DateTime)this.thoiGianTanCa);
-                }
-                return soGioDauCa + soGioCuoiCa;
+                //if (!Equals(this.soGioCoBanSaved, null) && this.soGioCoBanSaved != 0)
+                //{
+                //    return this.soGioCoBanSaved;
+                //}
+                //else
+                //{
+                return this.soGioDauCa + this.soGioCuoiCa;
+                // }
             }
         }
-        [XafDisplayName("Số Lần Đi Trễ")]
-        public int soLanDiTre
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public bool diTreSang
         {
             get
             {
-                int lanDiTre = 0;
+                bool lanDiTre = false;
                 if (!Equals(this.thoiGianVaoCa, null))
                 {
-                    lanDiTre += tinhSoLanDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, this.nguoiChamCong.caLamViec.thoiGianVao);
+                    lanDiTre = tinhSoLanDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, this.nguoiChamCong.caLamViec.thoiGianVao);
                 }
-                if(!Equals(this.thoiGianVaoGiuaCa, null))
+                return lanDiTre;
+            }
+        }
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public bool diTreChieu
+        {
+            get
+            {
+                bool lanDiTre = false;
+                if (!Equals(this.thoiGianVaoGiuaCa, null))
                 {
-                    lanDiTre += tinhSoLanDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa);
+                    lanDiTre = tinhSoLanDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa);
                 }
                 return lanDiTre;
             }
@@ -342,32 +376,52 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                double soGioDiTreDauCa = 0;
-                double soGioDiTreGiuaCa = 0;
-                if(!Equals(this.thoiGianVaoCa, null))
+                if (!Equals(this.soGioDiTreSaved, null) && this.soGioDiTreSaved != 0)
                 {
-                    soGioDiTreDauCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, this.nguoiChamCong.caLamViec.thoiGianVao);
+                    return this.soGioDiTreSaved;
                 }
-                if(!Equals(this.thoiGianVaoGiuaCa, null))
+                else
                 {
-                    soGioDiTreGiuaCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa);
+                    double soGioDiTreDauCa = 0;
+                    double soGioDiTreGiuaCa = 0;
+                    if (!Equals(this.thoiGianVaoCa, null))
+                    {
+                        soGioDiTreDauCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, this.nguoiChamCong.caLamViec.thoiGianVao);
+                    }
+                    if (!Equals(this.thoiGianVaoGiuaCa, null))
+                    {
+                        soGioDiTreGiuaCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa);
+                    }
+                    return soGioDiTreDauCa + soGioDiTreGiuaCa;
                 }
-                return soGioDiTreDauCa + soGioDiTreGiuaCa;
             }
         }
-        [XafDisplayName("Số Lần Về Sớm")]
-        public int soLanVeSom
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public bool veSomSang
         {
             get
             {
-                int lanVeSom = 0;
+                bool lanVeSom = false;
                 if (!Equals(this.thoiGianRaGiuaCa, null))
                 {
-                    lanVeSom += tinhSoLanVeSom(this.nguoiChamCong, (DateTime)this.thoiGianRaGiuaCa, this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
+                    lanVeSom = tinhSoLanVeSom(this.nguoiChamCong, (DateTime)this.thoiGianRaGiuaCa, this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
                 }
+                return lanVeSom;
+            }
+        }
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public bool veSomChieu
+        {
+            get
+            {
+                bool lanVeSom = false;
                 if (!Equals(this.thoiGianTanCa, null))
                 {
-                    lanVeSom += tinhSoLanVeSom(this.nguoiChamCong, (DateTime)this.thoiGianTanCa, this.nguoiChamCong.caLamViec.thoiGianTanCa);
+                    lanVeSom = tinhSoLanVeSom(this.nguoiChamCong, (DateTime)this.thoiGianTanCa, this.nguoiChamCong.caLamViec.thoiGianTanCa);
                 }
                 return lanVeSom;
             }
@@ -377,17 +431,24 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                double soGioVeSomGiuaCa = 0;
-                double soGioVeSomCuoiCa = 0;
-                if (!Equals(this.thoiGianRaGiuaCa, null))
+                if (!Equals(this.soGioVeSomSaved, null) && this.soGioVeSomSaved != 0)
                 {
-                    soGioVeSomGiuaCa = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianRaGiuaCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
+                    return this.soGioVeSomSaved;
                 }
-                if (!Equals(this.thoiGianTanCa, null))
+                else
                 {
-                    soGioVeSomCuoiCa = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianTanCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianTanCa);
+                    double soGioVeSomGiuaCa = 0;
+                    double soGioVeSomCuoiCa = 0;
+                    if (!Equals(this.thoiGianRaGiuaCa, null))
+                    {
+                        soGioVeSomGiuaCa = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianRaGiuaCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
+                    }
+                    if (!Equals(this.thoiGianTanCa, null))
+                    {
+                        soGioVeSomCuoiCa = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianTanCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianTanCa);
+                    }
+                    return soGioVeSomGiuaCa + soGioVeSomCuoiCa;
                 }
-                return soGioVeSomGiuaCa + soGioVeSomCuoiCa;
             }
         }
         double fSoGioTangCa;
@@ -415,114 +476,51 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         [Association(@"GioCong-LanXinDiTre")]
         [XafDisplayName("Lần Xin Đi Trễ")]
         public XPCollection<LanXinDiTre> lanXinDiTres { get { return GetCollection<LanXinDiTre>("lanXinDiTres"); } }
-        /* Đầy là chương trình tính thời gian làm việc của nhân viên đầu ca
-         * input: Tên nhân viên, thời gian vào đầu ca, thời gian vào cuối ca
-         * Atuthor: Tấn Hòa
-         * Date: 25/04/2019
-         * Sửa chữa: Đình Tri
-         * Date: 01/05/2019
-         */
-        private double tinhSoGioCongDauCa(NhanVien nhanVien, DateTime thoiGianVaoCa, DateTime thoiGianNghiGiuaCa)
-         {
-            double soGioCongDauCa;
-            DateTime thoiGianVaoCaHopLe;
-            DateTime thoiGianNghiGiuaCaHopLe;
-            TimeSpan gioCongDauCa = TimeSpan.Zero;
-            /*Nếu thời gian vào đầu ca của nhân viên là sớm hơn thời gian qui định ở ca làm việc của nhân viên thì qui đổi giờ chấm về giờ vào trong ca*/
-            if((thoiGianVaoCa.Hour < nhanVien.caLamViec.thoiGianVao.Hour))
-            {
-                thoiGianVaoCaHopLe = new DateTime(thoiGianVaoCa.Year, thoiGianVaoCa.Month, thoiGianVaoCa.Day, nhanVien.caLamViec.thoiGianVao.Hour, nhanVien.caLamViec.thoiGianVao.Minute, 0);
-            }
-            else if ((thoiGianVaoCa.Hour <= nhanVien.caLamViec.thoiGianVao.Hour) && (thoiGianVaoCa.Minute <= nhanVien.caLamViec.thoiGianVao.Minute))
-            {
-                thoiGianVaoCaHopLe = new DateTime(thoiGianVaoCa.Year, thoiGianVaoCa.Month, thoiGianVaoCa.Day, nhanVien.caLamViec.thoiGianVao.Hour, nhanVien.caLamViec.thoiGianVao.Minute, 0);
-            }
-            else
-            {
-                thoiGianVaoCaHopLe = thoiGianVaoCa;
-            }
-            if(thoiGianNghiGiuaCa.Hour > nhanVien.caLamViec.thoiGianRaGiuaCa.Hour)
-            {
-                thoiGianNghiGiuaCaHopLe = new DateTime(thoiGianNghiGiuaCa.Year, thoiGianNghiGiuaCa.Month, thoiGianNghiGiuaCa.Day, nhanVien.caLamViec.thoiGianRaGiuaCa.Hour, nhanVien.caLamViec.thoiGianRaGiuaCa.Minute, 0);
-            }
-            else if ((thoiGianNghiGiuaCa.Hour >= nhanVien.caLamViec.thoiGianRaGiuaCa.Hour) && (thoiGianNghiGiuaCa.Minute >= nhanVien.caLamViec.thoiGianRaGiuaCa.Minute))
-            {
-                thoiGianNghiGiuaCaHopLe = new DateTime(thoiGianNghiGiuaCa.Year, thoiGianNghiGiuaCa.Month, thoiGianNghiGiuaCa.Day, nhanVien.caLamViec.thoiGianRaGiuaCa.Hour, nhanVien.caLamViec.thoiGianRaGiuaCa.Minute, 0);
-            }
-            else
-            {
-                thoiGianNghiGiuaCaHopLe = thoiGianNghiGiuaCa;
-            }
-            gioCongDauCa = thoiGianNghiGiuaCaHopLe - thoiGianVaoCaHopLe;
-            soGioCongDauCa = gioCongDauCa.TotalMinutes / 60;
-            soGioCongDauCa = Math.Round(soGioCongDauCa, 2);
-            return soGioCongDauCa;
-         }
         /*
-         * Đây là chương trình tính thời gian làm việc của nhân viên cuối ca
-         * Input: thông tin nhân viên, thời gian vào giữa ca, thời gian tan ca
-         * Author: Tấn Hòa
-         * Date: 25/04/2019
-         * Sửa chữa: Đình Tri
-         * Date: 01/05/2019
+         * Đây là chương trình tính giờ của nhân viên
+         * Input: thông tin nhân viên, thời gian vào ca, thời gian ra ca đó, thời gian theo ca làm việc
+         * Author: Đình Tri
+         * Date: 08/05/2019
          */
-         public double tinhSoGioCongCuoiCa(NhanVien nhanVien, DateTime thoiGianVaoGiuaCa, DateTime thoiGianTanCa)
-         {
-            double soGioCuoiCa;
-            DateTime thoiGianVaoGiuaCaHopLe = new DateTime();
-            DateTime thoiGianTanCaHopLe = new DateTime();
-            TimeSpan gioCongCuoiCa = TimeSpan.Zero;
-            /*Chuẩn Hóa Thời Gian Vào Giữa Ca*/
-            if((thoiGianVaoGiuaCa.Hour < nhanVien.caLamViec.thoiGianVaoGiuaCa.Hour))
+        private double tinhSoGioCong(NhanVien nhanVien, DateTime thoiGianVao, DateTime thoiGianRa, DateTime thoiGianVaoHopLe, DateTime thoiGianRaHopLe)
+        {
+            double soGioCong = 0;
+            TimeSpan tongSoGio = TimeSpan.Zero;
+            DateTime vaoHopLe = new DateTime(thoiGianVao.Year, thoiGianVao.Month, thoiGianVao.Day, thoiGianVaoHopLe.Hour, thoiGianVaoHopLe.Minute, 0);
+            DateTime raHopLe = new DateTime(thoiGianRa.Year, thoiGianRa.Month, thoiGianRa.Day, thoiGianRaHopLe.Hour, thoiGianRaHopLe.Minute, 0);
+            if (DateTime.Compare(thoiGianVao, vaoHopLe) <= 0)
             {
-                thoiGianVaoGiuaCaHopLe = new DateTime(thoiGianVaoGiuaCa.Year, thoiGianVaoGiuaCa.Month, thoiGianVaoGiuaCa.Day, nhanVien.caLamViec.thoiGianVaoGiuaCa.Hour, nhanVien.caLamViec.thoiGianVaoGiuaCa.Minute, 0);
+                thoiGianVao = vaoHopLe;
             }
-            else if ((thoiGianVaoGiuaCa.Hour <= nhanVien.caLamViec.thoiGianVaoGiuaCa.Hour) && (thoiGianVaoGiuaCa.Minute <= nhanVien.caLamViec.thoiGianVaoGiuaCa.Minute))
+            if (DateTime.Compare(thoiGianRa, raHopLe) >= 0)
             {
-                thoiGianVaoGiuaCaHopLe = new DateTime(thoiGianVaoGiuaCa.Year, thoiGianVaoGiuaCa.Month, thoiGianVaoGiuaCa.Day, nhanVien.caLamViec.thoiGianVaoGiuaCa.Hour, nhanVien.caLamViec.thoiGianVaoGiuaCa.Minute, 0);
+                thoiGianRa = raHopLe;
             }
-            else
-            {
-                thoiGianVaoGiuaCaHopLe = thoiGianVaoGiuaCa;
-            };
-            /*Chuẩn Hóa Thời Gian Ra Cuối Ca*/
-            if((thoiGianTanCa.Hour > nhanVien.caLamViec.thoiGianTanCa.Hour))
-            {
-                thoiGianTanCaHopLe = new DateTime(thoiGianTanCa.Year, thoiGianTanCa.Month, thoiGianTanCa.Day, nhanVien.caLamViec.thoiGianTanCa.Hour, nhanVien.caLamViec.thoiGianTanCa.Minute, 0);
-            }
-            else if ((thoiGianTanCa.Hour >= nhanVien.caLamViec.thoiGianTanCa.Hour) && (thoiGianTanCa.Minute >= nhanVien.caLamViec.thoiGianTanCa.Minute))
-            {
-                thoiGianTanCaHopLe = new DateTime(thoiGianTanCa.Year, thoiGianTanCa.Month, thoiGianTanCa.Day, nhanVien.caLamViec.thoiGianTanCa.Hour, nhanVien.caLamViec.thoiGianTanCa.Minute, 0);
-            }
-            else
-            {
-                thoiGianTanCaHopLe = thoiGianTanCa;
-            }
-            gioCongCuoiCa = thoiGianTanCaHopLe - thoiGianVaoGiuaCaHopLe;
-            soGioCuoiCa = gioCongCuoiCa.TotalMinutes / 60;
-            soGioCuoiCa = Math.Round(soGioCuoiCa, 2);
-            return soGioCuoiCa;
-         }
+            tongSoGio = thoiGianRa - thoiGianVao;
+            soGioCong = tongSoGio.TotalMinutes / 60;
+            soGioCong = Math.Round(soGioCong, 2);
+            return soGioCong;
+        }
         /*
          * Đây là chương trình tính thời gian đi trễ của nhân viên
          * Input: thông tin nhân viên, thời gian vào đầu ca, thời gian giữa ca
          * Author: Đình Tri
          * Date: 01/05/2019
          */
-         public double tinhSoGioDiTre(NhanVien nhanVien, DateTime thoiGianVao, DateTime thoiGianHopLe)
-         {
+        private double tinhSoGioDiTre(NhanVien nhanVien, DateTime thoiGianVao, DateTime thoiGianHopLe)
+        {
             double soGioDiTre = 0;
             TimeSpan gioDiTre = TimeSpan.Zero;
             DateTime thoiGianVaoHopLe = new DateTime(thoiGianVao.Year, thoiGianVao.Month, thoiGianVao.Day, thoiGianHopLe.Hour, thoiGianHopLe.Minute, 0);
-            if(DateTime.Compare(thoiGianVao, thoiGianVaoHopLe) <= 0)
+            if (DateTime.Compare(thoiGianVao, thoiGianVaoHopLe) <= 0)
             {
                 return soGioDiTre;
             }
             else
             {
                 gioDiTre = thoiGianVao - thoiGianVaoHopLe;
-                soGioDiTre = gioDiTre.TotalMinutes / 60;
-                if(gioDiTre.TotalMinutes >= 4)
+                soGioDiTre = Math.Round(gioDiTre.TotalMinutes / 60, 2);
+                if (gioDiTre.TotalMinutes >= 4)
                 {
                     return soGioDiTre;
                 }
@@ -531,26 +529,26 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                     return 0;
                 }
             }
-         }
+        }
         /*
          * Đây là chương trình tính thời gian về sớm của nhân viên
          * Input: thông tin nhân viên, thời gian vào đầu ca, thời gian giữa ca
          * Author: Đình Tri
          * Date: 01/05/2019
          */
-        public double tinhSoGioVeSom(NhanVien nhanVien, DateTime thoiGianVe, DateTime thoiGianHetCa)
+        private double tinhSoGioVeSom(NhanVien nhanVien, DateTime thoiGianVe, DateTime thoiGianHetCa)
         {
             double soGioVeSom = 0;
             DateTime thoiGianHopLe = new DateTime(thoiGianVe.Year, thoiGianVe.Month, thoiGianVe.Day, thoiGianHetCa.Hour, thoiGianHetCa.Minute, 0);
             TimeSpan gioVeSom = TimeSpan.Zero;
-            if(DateTime.Compare(thoiGianVe, thoiGianHopLe) > 0)
+            if (DateTime.Compare(thoiGianVe, thoiGianHopLe) > 0)
             {
                 return soGioVeSom;
             }
             else
             {
                 gioVeSom = thoiGianHopLe - thoiGianVe;
-                soGioVeSom = gioVeSom.TotalMinutes / 60;
+                soGioVeSom = Math.Round(gioVeSom.TotalMinutes / 60, 2);
                 return soGioVeSom;
             }
         }
@@ -560,16 +558,16 @@ namespace QuanLyNhanSu.Module.BusinessObjects
          * Author: Đình Tri
          * Date: 02/05/2019
          */
-        public int tinhSoLanDiTre(NhanVien nhanVien, DateTime thoiGianVao, DateTime thoiGianCaLamViec)
+        private bool tinhSoLanDiTre(NhanVien nhanVien, DateTime thoiGianVao, DateTime thoiGianCaLamViec)
         {
-            int soLanTre = 0;
+            bool soLanTre = false;
             TimeSpan soGio = TimeSpan.Zero;
             DateTime thoiGianHopLe = new DateTime(thoiGianVao.Year, thoiGianVao.Month, thoiGianVao.Day, thoiGianCaLamViec.Hour, thoiGianCaLamViec.Minute, 0);
-            if(DateTime.Compare(thoiGianVao, thoiGianHopLe) > 0)
+            if (DateTime.Compare(thoiGianVao, thoiGianHopLe) > 0)
             {
-                if((thoiGianVao - thoiGianHopLe).TotalMinutes >= 4)
+                if ((thoiGianVao - thoiGianHopLe).TotalMinutes >= 4)
                 {
-                    soLanTre = 1;
+                    soLanTre = true;
                 }
             }
             return soLanTre;
@@ -580,13 +578,13 @@ namespace QuanLyNhanSu.Module.BusinessObjects
          * Author: Đình Tri
          * Date: 02/05/2019
          */
-        public int tinhSoLanVeSom(NhanVien nhanVien, DateTime thoiGianRa, DateTime thoiGianCaLamViec)
+        private bool tinhSoLanVeSom(NhanVien nhanVien, DateTime thoiGianRa, DateTime thoiGianCaLamViec)
         {
-            int soLanSom = 0;
+            bool soLanSom = false;
             DateTime thoiGianHopLe = new DateTime(thoiGianRa.Year, thoiGianRa.Month, thoiGianRa.Day, thoiGianCaLamViec.Hour, thoiGianCaLamViec.Minute, 0);
             if (DateTime.Compare(thoiGianRa, thoiGianHopLe) < 0)
             {
-                soLanSom = 1;
+                soLanSom = true;
             }
             return soLanSom;
         }
