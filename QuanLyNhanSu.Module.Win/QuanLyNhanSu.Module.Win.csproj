@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="WinModule.resx">
       <DependentUpon>WinModule.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -163,9 +164,6 @@
       <Project>{5F15837D-D1E5-44DC-92F0-4F2EBE9C3F8D}</Project>
       <Name>QuanLyNhanSu.Module</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Controllers\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Editors\ReadMe.txt" />
@@ -191,6 +189,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

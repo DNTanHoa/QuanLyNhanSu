@@ -1,15 +1,99 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
   <NavigationItems>
     <Items>
-      <Item Id="Default" IsNewNode="True">
-        <Items>
-          <Item Id="AboutInfo" ViewId="AboutInfo_DetailView" IsNewNode="True"/>
+      <Item Id="Default" Removed="True">
+        <Items IsNewNode="True">
+          <Item Id="AboutInfo" ViewId="AboutInfo_DetailView" IsNewNode="True" />
+          <Item Id="CheckInOut_ListView" Removed="True" />
         </Items>
       </Item>
     </Items>
   </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="18.2.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemMobileModule" Version="18.2.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="18.2.6.0" IsNewNode="True" />
+  </SchemaModules>
   <Views>
-    <DetailView Id="AboutInfo_DetailView" MobileVisible="True"></DetailView>
+    <DetailView Id="BoPhan_DetailView" Removed="True" />
+    <ListView Id="BoPhan_ListView" Removed="True" />
+    <ListView Id="BoPhan_LookupListView" Removed="True" />
+    <ListView Id="BoPhan_NhanViens_ListView" Removed="True" />
+    <ListView Id="BoPhan_thangChamCongs_ListView" Removed="True" />
+    <DetailView Id="CaLamViec_DetailView" Removed="True" />
+    <ListView Id="CaLamViec_ListView" Removed="True" />
+    <ListView Id="CaLamViec_LookupListView" Removed="True" />
+    <DetailView Id="CheckInOut_DetailView" Removed="True" />
+    <ListView Id="CheckInOut_ListView" Removed="True" />
+    <ListView Id="CheckInOut_LookupListView" Removed="True" />
+    <DetailView Id="ChucVu_DetailView" Removed="True" />
+    <ListView Id="ChucVu_ListView" Removed="True" />
+    <ListView Id="ChucVu_LookupListView" Removed="True" />
+    <DetailView Id="DashboardCreationInfo_DetailView" Removed="True" />
+    <ListView Id="DashboardCreationInfo_ListView" Removed="True" />
+    <ListView Id="DashboardCreationInfo_LookupListView" Removed="True" />
+    <ListView Id="DashboardCreationInfo_ViewItems_ListView" Removed="True" />
+    <DetailView Id="DashboardName_DetailView" Removed="True" />
+    <ListView Id="DashboardName_ListView" Removed="True" />
+    <ListView Id="DashboardName_LookupListView" Removed="True" />
+    <DetailView Id="EmployeeRole_DetailView" Removed="True" />
+    <ListView Id="EmployeeRole_ListView" Removed="True" />
+    <ListView Id="EmployeeRole_LookupListView" Removed="True" />
+    <ListView Id="EmployeeRole_NguoiDungs_ListView" Removed="True" />
+    <ListView Id="GioCong_checkInOuts_ListView" Removed="True" />
+    <DetailView Id="GioCong_DetailView" Removed="True" />
+    <ListView Id="GioCong_lanTangCas_ListView" Removed="True" />
+    <ListView Id="GioCong_lanXinDiTres_ListView" Removed="True" />
+    <ListView Id="GioCong_ListView" Removed="True" />
+    <ListView Id="GioCong_LookupListView" Removed="True" />
+    <DetailView Id="HopDongLaoDong_DetailView" Removed="True" />
+    <ListView Id="HopDongLaoDong_ListView" Removed="True" />
+    <ListView Id="HopDongLaoDong_LookupListView" Removed="True" />
+    <DetailView Id="LanBoSungGio_DetailView" Removed="True" />
+    <ListView Id="LanBoSungGio_ListView" Removed="True" />
+    <ListView Id="LanBoSungGio_LookupListView" Removed="True" />
+    <DetailView Id="LanNghiPhep_DetailView" Removed="True" />
+    <ListView Id="LanNghiPhep_ListView" Removed="True" />
+    <ListView Id="LanNghiPhep_LookupListView" Removed="True" />
+    <DetailView Id="LanTangCa_DetailView" Removed="True" />
+    <ListView Id="LanTangCa_ListView" Removed="True" />
+    <ListView Id="LanTangCa_LookupListView" Removed="True" />
+    <DetailView Id="LanXinDiTre_DetailView" Removed="True" />
+    <ListView Id="LanXinDiTre_ListView" Removed="True" />
+    <ListView Id="LanXinDiTre_LookupListView" Removed="True" />
+    <DetailView Id="LoaiHopDong_DetailView" Removed="True" />
+    <ListView Id="LoaiHopDong_ListView" Removed="True" />
+    <ListView Id="LoaiHopDong_LookupListView" Removed="True" />
+    <DetailView Id="LoaiTangCa_DetailView" Removed="True" />
+    <ListView Id="LoaiTangCa_ListView" Removed="True" />
+    <ListView Id="LoaiTangCa_LookupListView" Removed="True" />
+    <DetailView Id="MayChamCong_DetailView" Removed="True" />
+    <ListView Id="MayChamCong_ListView" Removed="True" />
+    <ListView Id="MayChamCong_LookupListView" Removed="True" />
+    <DetailView Id="NgayLe_DetailView" Removed="True" />
+    <ListView Id="NgayLe_ListView" Removed="True" />
+    <ListView Id="NgayLe_LookupListView" Removed="True" />
+    <DetailView Id="NgayTinhCong_DetailView" Removed="True" />
+    <ListView Id="NgayTinhCong_gioCongs_ListView" Removed="True" />
+    <ListView Id="NgayTinhCong_ListView" Removed="True" />
+    <ListView Id="NgayTinhCong_LookupListView" Removed="True" />
+    <DetailView Id="NguoiDung_DetailView" Removed="True" />
+    <ListView Id="NguoiDung_EmployeeRoles_ListView" Removed="True" />
+    <ListView Id="NguoiDung_ListView" Removed="True" />
+    <ListView Id="NguoiDung_LookupListView" Removed="True" />
+    <DetailView Id="NhanVien_DetailView" Removed="True" />
+    <ListView Id="NhanVien_hopDongLaoDongs_ListView" Removed="True" />
+    <ListView Id="NhanVien_lanBoSungGios_ListView" Removed="True" />
+    <ListView Id="NhanVien_lanNghiPheps_ListView" Removed="True" />
+    <ListView Id="NhanVien_lanTangCas_ListView" Removed="True" />
+    <ListView Id="NhanVien_lanXinDiTres_ListView" Removed="True" />
+    <ListView Id="NhanVien_ListView" Removed="True" />
+    <ListView Id="NhanVien_LookupListView" Removed="True" />
+    <ListView Id="NhanVien_thoiGianChamCongs_ListView" Removed="True" />
+    <DetailView Id="ThangChamCong_DetailView" Removed="True" />
+    <ListView Id="ThangChamCong_ListView" Removed="True" />
+    <ListView Id="ThangChamCong_LookupListView" Removed="True" />
+    <ListView Id="ThangChamCong_ngayTinhCongs_ListView" Removed="True" />
   </Views>
 </Application>
