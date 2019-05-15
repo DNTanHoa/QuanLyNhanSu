@@ -56,7 +56,6 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             get { return fThangChamCong; }
             set { SetPropertyValue("thangChamCong", ref fThangChamCong, value); }
         }
-        int fSoNgayLamViec;
         [XafDisplayName("Số Ngày Làm Việc")]
         [VisibleInListView(false)]
         public int soNgayLamViec
@@ -77,7 +76,6 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 return soNgay;
             }
         }
-        int fSoNgayChuNhat;
         [XafDisplayName("Số Ngày Chủ Nhật")]
         [VisibleInListView(false)]
         public int soNgayChuNhat
@@ -98,7 +96,6 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 return soNgay;
             }
         }
-        int fSoNgayLe;
         [XafDisplayName("Số Ngày Lễ")]
         [VisibleInListView(false)]
         public int soNgayLe
