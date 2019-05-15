@@ -11,13 +11,14 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.Module.BusinessObjects
 {
+
     [Persistent(@"GioCong")]
     [XafDisplayName("Bảng Giờ Công")]
     [XafDefaultProperty("nguoiChamCong")]
-    [Appearance("diTreSang", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianVaoCa", Criteria = "diTreSang = true")]
-    [Appearance("diTreChieu", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianVaoGiuaCa", Criteria = "diTreChieu = true")]
-    [Appearance("veSomSang", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianRaGiuaCa", Criteria = "veSomSang = true")]
-    [Appearance("veSomChieu", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianTanCa", Criteria = "veSomChieu = true")]
+    [Appearance("diTreSang", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianVaoCa", Criteria = "diTreSang != 0")]
+    [Appearance("diTreChieu", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianVaoGiuaCa", Criteria = "diTreChieu != 0")]
+    [Appearance("veSomSang", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianRaGiuaCa", Criteria = "veSomSang != 0")]
+    [Appearance("veSomChieu", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianTanCa", Criteria = "veSomChieu != 0")]
     [Appearance("soLanVeSom", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "soLanVeSom", Criteria = "soLanVeSom != 0")]
     [Appearance("duyetTangCa", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "soGioTangCa", Criteria = "duyetTangCa = false")]
     public class GioCong : XPLiteObject
@@ -35,8 +36,12 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             this.fThoiGianVaoGiuaCaSaved = this.thoiGianVaoGiuaCa;
             this.thoiGianTanCaSaved = this.thoiGianTanCa;
             this.soGioCoBanSaved = this.soGioCoBan;
+            this.diTreSangSaved = this.diTreSang;
+            this.diTreChieuSaved = this.diTreChieu;
             this.soGioDiTreSaved = this.soGioDiTre;
             this.soGioVeSomSaved = this.soGioVeSom;
+            this.veSomSangSaved = this.veSomSang;
+            this.veSomChieuSaved = this.veSomChieu;
             this.soGioDauCaSaved = this.soGioDauCa;
             this.soGioCuoiCaSaved = this.soGioCuoiCa;
             Session.CommitTransaction();
@@ -119,6 +124,42 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get => fThoiGianTanCaSaved;
             set => SetPropertyValue("thoiGianTanCaSaved", ref fThoiGianTanCaSaved, value);
+        }
+        double? fDiTreSangSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? diTreSangSaved
+        {
+            get => fDiTreSangSaved;
+            set => SetPropertyValue("diTreSangSaved", ref fDiTreSangSaved, value);
+        }
+        double? fDiTreChieuSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? diTreChieuSaved
+        {
+            get => fDiTreChieuSaved;
+            set => SetPropertyValue("diTreChieuSaved", ref fDiTreChieuSaved, value);
+        }
+        double? fVeSomSangSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? veSomSangSaved
+        {
+            get => fVeSomSangSaved;
+            set => SetPropertyValue("veSomSangSaved", ref fVeSomSangSaved, value);
+        }
+        double? fVeSomChieuSaved;
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public double? veSomChieuSaved
+        {
+            get => fVeSomChieuSaved;
+            set => SetPropertyValue("veSomChieuSaved", ref fVeSomChieuSaved, value);
         }
         double? fSoGioCoBanSaved;
         [VisibleInDetailView(false)]
@@ -331,44 +372,51 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                //if (!Equals(this.soGioCoBanSaved, null) && this.soGioCoBanSaved != 0)
-                //{
-                //    return this.soGioCoBanSaved;
-                //}
-                //else
-                //{
                 return this.soGioDauCa + this.soGioCuoiCa;
-                // }
             }
         }
         [VisibleInDetailView(false)]
         [VisibleInListView(false)]
         [VisibleInLookupListView(false)]
-        public bool diTreSang
+        public double? diTreSang
         {
             get
             {
-                bool lanDiTre = false;
-                if (!Equals(this.thoiGianVaoCa, null))
+                if((!Equals(this.diTreSangSaved,null)) && (this.diTreSangSaved != 0))
                 {
-                    lanDiTre = tinhSoLanDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, this.nguoiChamCong.caLamViec.thoiGianVao);
+                    return this.diTreSangSaved;
                 }
-                return lanDiTre;
+                else
+                {
+                    double soGioDiTreDauCa = 0;
+                    if (!Equals(this.thoiGianVaoCa, null))
+                    {
+                        soGioDiTreDauCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, this.nguoiChamCong.caLamViec.thoiGianVao);
+                    }
+                    return soGioDiTreDauCa;
+                }
             }
         }
         [VisibleInDetailView(false)]
         [VisibleInListView(false)]
         [VisibleInLookupListView(false)]
-        public bool diTreChieu
+        public double? diTreChieu
         {
             get
             {
-                bool lanDiTre = false;
-                if (!Equals(this.thoiGianVaoGiuaCa, null))
+                if((!Equals(this.diTreChieuSaved, null)) && (this.diTreChieuSaved != 0))
                 {
-                    lanDiTre = tinhSoLanDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa);
+                    return this.diTreChieuSaved;
                 }
-                return lanDiTre;
+                else
+                {
+                    double soGioDiTreGiuaCa = 0;
+                    if (!Equals(this.thoiGianVaoGiuaCa, null))
+                    {
+                        soGioDiTreGiuaCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa);
+                    }
+                    return soGioDiTreGiuaCa;
+                }
             }
         }
         [XafDisplayName("Số Giờ Đi Trễ")]
@@ -376,37 +424,20 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                if (!Equals(this.soGioDiTreSaved, null) && this.soGioDiTreSaved != 0)
-                {
-                    return this.soGioDiTreSaved;
-                }
-                else
-                {
-                    double soGioDiTreDauCa = 0;
-                    double soGioDiTreGiuaCa = 0;
-                    if (!Equals(this.thoiGianVaoCa, null))
-                    {
-                        soGioDiTreDauCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoCa, this.nguoiChamCong.caLamViec.thoiGianVao);
-                    }
-                    if (!Equals(this.thoiGianVaoGiuaCa, null))
-                    {
-                        soGioDiTreGiuaCa = tinhSoGioDiTre(this.nguoiChamCong, (DateTime)this.thoiGianVaoGiuaCa, this.nguoiChamCong.caLamViec.thoiGianVaoGiuaCa);
-                    }
-                    return soGioDiTreDauCa + soGioDiTreGiuaCa;
-                }
+                return this.diTreChieu + this.diTreSang;
             }
         }
         [VisibleInDetailView(false)]
         [VisibleInListView(false)]
         [VisibleInLookupListView(false)]
-        public bool veSomSang
+        public double? veSomSang
         {
             get
             {
-                bool lanVeSom = false;
+                double lanVeSom = 0;
                 if (!Equals(this.thoiGianRaGiuaCa, null))
                 {
-                    lanVeSom = tinhSoLanVeSom(this.nguoiChamCong, (DateTime)this.thoiGianRaGiuaCa, this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
+                    lanVeSom = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianRaGiuaCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
                 }
                 return lanVeSom;
             }
@@ -414,14 +445,14 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         [VisibleInDetailView(false)]
         [VisibleInListView(false)]
         [VisibleInLookupListView(false)]
-        public bool veSomChieu
+        public double? veSomChieu
         {
             get
             {
-                bool lanVeSom = false;
+                double lanVeSom = 0;
                 if (!Equals(this.thoiGianTanCa, null))
                 {
-                    lanVeSom = tinhSoLanVeSom(this.nguoiChamCong, (DateTime)this.thoiGianTanCa, this.nguoiChamCong.caLamViec.thoiGianTanCa);
+                    lanVeSom = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianTanCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianTanCa);
                 }
                 return lanVeSom;
             }
@@ -431,24 +462,7 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get
             {
-                if (!Equals(this.soGioVeSomSaved, null) && this.soGioVeSomSaved != 0)
-                {
-                    return this.soGioVeSomSaved;
-                }
-                else
-                {
-                    double soGioVeSomGiuaCa = 0;
-                    double soGioVeSomCuoiCa = 0;
-                    if (!Equals(this.thoiGianRaGiuaCa, null))
-                    {
-                        soGioVeSomGiuaCa = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianRaGiuaCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianRaGiuaCa);
-                    }
-                    if (!Equals(this.thoiGianTanCa, null))
-                    {
-                        soGioVeSomCuoiCa = tinhSoGioVeSom(this.nguoiChamCong, (DateTime)this.thoiGianTanCa, (DateTime)this.nguoiChamCong.caLamViec.thoiGianTanCa);
-                    }
-                    return soGioVeSomGiuaCa + soGioVeSomCuoiCa;
-                }
+                return this.veSomSang + this.veSomChieu;
             }
         }
         double fSoGioTangCa;
@@ -512,23 +526,15 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             double soGioDiTre = 0;
             TimeSpan gioDiTre = TimeSpan.Zero;
             DateTime thoiGianVaoHopLe = new DateTime(thoiGianVao.Year, thoiGianVao.Month, thoiGianVao.Day, thoiGianHopLe.Hour, thoiGianHopLe.Minute, 0);
-            if (DateTime.Compare(thoiGianVao, thoiGianVaoHopLe) <= 0)
-            {
-                return soGioDiTre;
-            }
-            else
+            if(DateTime.Compare(thoiGianVao, thoiGianVaoHopLe) > 0)
             {
                 gioDiTre = thoiGianVao - thoiGianVaoHopLe;
-                soGioDiTre = Math.Round(gioDiTre.TotalMinutes / 60, 2);
-                if (gioDiTre.TotalMinutes >= 4)
+                if(gioDiTre.TotalMinutes >= 4)
                 {
-                    return soGioDiTre;
-                }
-                else
-                {
-                    return 0;
+                    soGioDiTre = Math.Round(gioDiTre.TotalMinutes / 60, 2);
                 }
             }
+            return soGioDiTre;
         }
         /*
          * Đây là chương trình tính thời gian về sớm của nhân viên
@@ -541,52 +547,12 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             double soGioVeSom = 0;
             DateTime thoiGianHopLe = new DateTime(thoiGianVe.Year, thoiGianVe.Month, thoiGianVe.Day, thoiGianHetCa.Hour, thoiGianHetCa.Minute, 0);
             TimeSpan gioVeSom = TimeSpan.Zero;
-            if (DateTime.Compare(thoiGianVe, thoiGianHopLe) > 0)
-            {
-                return soGioVeSom;
-            }
-            else
+            if (DateTime.Compare(thoiGianVe, thoiGianHopLe) < 0)
             {
                 gioVeSom = thoiGianHopLe - thoiGianVe;
                 soGioVeSom = Math.Round(gioVeSom.TotalMinutes / 60, 2);
-                return soGioVeSom;
             }
-        }
-        /*
-         * Đây là chương trình tính số lần đi trễ của nhân viên
-         * Input: thông tin nhân viên, thời gian vào đầu ca, thời gian ca làm việc
-         * Author: Đình Tri
-         * Date: 02/05/2019
-         */
-        private bool tinhSoLanDiTre(NhanVien nhanVien, DateTime thoiGianVao, DateTime thoiGianCaLamViec)
-        {
-            bool soLanTre = false;
-            TimeSpan soGio = TimeSpan.Zero;
-            DateTime thoiGianHopLe = new DateTime(thoiGianVao.Year, thoiGianVao.Month, thoiGianVao.Day, thoiGianCaLamViec.Hour, thoiGianCaLamViec.Minute, 0);
-            if (DateTime.Compare(thoiGianVao, thoiGianHopLe) > 0)
-            {
-                if ((thoiGianVao - thoiGianHopLe).TotalMinutes >= 4)
-                {
-                    soLanTre = true;
-                }
-            }
-            return soLanTre;
-        }
-        /*
-         * Đây là chương trình tính số lần về sớm của nhân viên
-         * Input: thông tin nhân viên, thời gian ra khỏi ca, thời gian ca làm việc
-         * Author: Đình Tri
-         * Date: 02/05/2019
-         */
-        private bool tinhSoLanVeSom(NhanVien nhanVien, DateTime thoiGianRa, DateTime thoiGianCaLamViec)
-        {
-            bool soLanSom = false;
-            DateTime thoiGianHopLe = new DateTime(thoiGianRa.Year, thoiGianRa.Month, thoiGianRa.Day, thoiGianCaLamViec.Hour, thoiGianCaLamViec.Minute, 0);
-            if (DateTime.Compare(thoiGianRa, thoiGianHopLe) < 0)
-            {
-                soLanSom = true;
-            }
-            return soLanSom;
+            return soGioVeSom;
         }
     }
 }

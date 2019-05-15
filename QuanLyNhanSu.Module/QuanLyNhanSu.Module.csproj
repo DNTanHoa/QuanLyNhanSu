@@ -43,9 +43,12 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Charts.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.ExpressApp.CloneObject.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.ExpressApp.Reports.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Security.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -59,6 +62,9 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.Office.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v18.2.Core">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -74,9 +80,18 @@
     <Reference Include="DevExpress.Persistent.BaseImpl.v18.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.RichEdit.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v18.2.Export, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpo.v18.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.XtraCharts.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -84,11 +99,13 @@
       <Name>System</Name>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data">
       <Name>System.Data</Name>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing">
       <Private>False</Private>
     </Reference>
@@ -136,6 +153,12 @@
     <Compile Include="Controllers\CapNhatNgayCong.Designer.cs">
       <DependentUpon>CapNhatNgayCong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CapNhatNhanVien.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\CapNhatNhanVien.Designer.cs">
+      <DependentUpon>CapNhatNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CapNhatThangChamCong.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -147,6 +170,12 @@
     </Compile>
     <Compile Include="Controllers\CapNhatXinDiTre.Designer.cs">
       <DependentUpon>CapNhatXinDiTre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ChonNgay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\ChonNgay.Designer.cs">
+      <DependentUpon>ChonNgay.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\DuyetNghi.cs">
       <SubType>Component</SubType>
@@ -160,6 +189,12 @@
     <Compile Include="Controllers\DuyetTangCa.Designer.cs">
       <DependentUpon>DuyetTangCa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\XuatBaoCaoGioCong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\XuatBaoCaoGioCong.Designer.cs">
+      <DependentUpon>XuatBaoCaoGioCong.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseUpdate\Updater.cs" />
     <Compile Include="Module.cs">
       <SubType>Component</SubType>
@@ -168,6 +203,18 @@
       <DependentUpon>Module.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\BaoCaoGioCong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\BaoCaoGioCong.Designer.cs">
+      <DependentUpon>BaoCaoGioCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\FormChonNgayBaoCaoGioCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\FormChonNgayBaoCaoGioCong.Designer.cs">
+      <DependentUpon>FormChonNgayBaoCaoGioCong.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controllers\CapNhatGioCong.resx">
@@ -185,11 +232,17 @@
     <EmbeddedResource Include="Controllers\CapNhatXinDiTre.resx">
       <DependentUpon>CapNhatXinDiTre.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\ChonNgay.resx">
+      <DependentUpon>ChonNgay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controllers\DuyetNghi.resx">
       <DependentUpon>DuyetNghi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controllers\DuyetTangCa.resx">
       <DependentUpon>DuyetTangCa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\XuatBaoCaoGioCong.resx">
+      <DependentUpon>XuatBaoCaoGioCong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
     <EmbeddedResource Include="Module.resx">
@@ -197,6 +250,12 @@
       <DependentUpon>Module.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\BaoCaoGioCong.resx">
+      <DependentUpon>BaoCaoGioCong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FormChonNgayBaoCaoGioCong.resx">
+      <DependentUpon>FormChonNgayBaoCaoGioCong.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -216,6 +275,13 @@
     <None Include="FunctionalTests\WebSample.ets" />
     <None Include="Images\ReadMe.txt" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\QuanLyNhanSu.Module.BusinessObjects.GioCong.datasource" />
+    <None Include="Properties\DataSources\QuanLyNhanSu.Module.BusinessObjects.NgayLe.datasource" />
+    <None Include="Properties\DataSources\QuanLyNhanSu.Module.BusinessObjects.NgayTinhCong.datasource" />
+    <None Include="Properties\DataSources\QuanLyNhanSu.Module.BusinessObjects.NhanVien.datasource" />
+    <None Include="Properties\DataSources\QuanLyNhanSu.Module.BusinessObjects.ThangChamCong.datasource" />
+    <None Include="Properties\DataSources\QuanLyNhanSu.Module.ReportParam.WorkingTime.datasource" />
+    <None Include="Properties\DataSources\QuanLyNhanSu.Module.ReportParam.WorkingTime1.datasource" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

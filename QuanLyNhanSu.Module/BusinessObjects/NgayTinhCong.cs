@@ -51,6 +51,23 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             get { return fNgayChamCong; }
             set { SetPropertyValue("ngayChamCong", ref fNgayChamCong, value); }
         }
+        [VisibleInDetailView(false)]
+        [VisibleInListView(false)]
+        [VisibleInLookupListView(false)]
+        public string loaiTinhCong
+        {
+            get
+            {
+                if(this.ngayChamCong.Day <= 15)
+                {
+                    return "Nửa Tháng Đầu";
+                }
+                else
+                {
+                    return "Nửa Tháng Sau";
+                }
+            }
+        }
         [VisibleInListView(false)]
         [VisibleInDetailView(false)]
         [XafDisplayName("Ngày Chủ Nhật")]

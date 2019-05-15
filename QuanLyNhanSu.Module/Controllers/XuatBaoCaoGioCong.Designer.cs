@@ -1,6 +1,6 @@
 ﻿namespace QuanLyNhanSu.Module.Controllers
 {
-    partial class CapNhatNgayCong
+    partial class XuatBaoCaoGioCong
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.xuatGioCong = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
-            // CapNhatNgayCong
+            // xuatGioCong
             // 
-            this.TargetViewId = "NguoiDung_ListView";
+            this.xuatGioCong.Caption = "Xuất Giờ Công";
+            this.xuatGioCong.ConfirmationMessage = null;
+            this.xuatGioCong.Id = "xuatGioCong";
+            this.xuatGioCong.TargetObjectType = typeof(QuanLyNhanSu.Module.BusinessObjects.ThangChamCong);
+            this.xuatGioCong.ToolTip = null;
+            this.xuatGioCong.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.xuatGioCong_Execute);
+            // 
+            // XuatBaoCaoGioCong
+            // 
+            this.Actions.Add(this.xuatGioCong);
 
         }
 
         #endregion
+
+        private DevExpress.ExpressApp.Actions.SimpleAction xuatGioCong;
     }
 }
