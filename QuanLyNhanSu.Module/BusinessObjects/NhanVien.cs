@@ -20,9 +20,9 @@ namespace QuanLyNhanSu.Module.BusinessObjects
     [Appearance("IsChecked", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "TenNhanVien", Criteria = "IsChecked = false")]
     [Appearance("daNghiViec", BackColor = "#565947", FontColor = "white", Context = "ListView", TargetItems = "TenNhanVien", Criteria = "daNghiViec = true")]
 
-    public class NhanVien:XPLiteObject
+    public class NhanVien : XPLiteObject
     {
-        public NhanVien(Session session):base(session)
+        public NhanVien(Session session) : base(session)
         {
 
         }
@@ -35,10 +35,14 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             base.OnSaving();
 
         }
+        protected override void OnLoading()
+        {
+            base.OnLoading();
+        }
         protected override void OnChanged(string propertyName, object oldValue, object newValue)
         {
             base.OnChanged(propertyName, oldValue, newValue);
-            if(!Equals(this.ngayNghiViec, null))
+            if (!Equals(this.ngayNghiViec, null))
             {
                 if (DateTime.Compare(DateTime.Today, (DateTime)this.ngayNghiViec) >= 0)
                 {
@@ -49,6 +53,14 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             else
             {
                 this.daNghiViec = false;
+            }
+            if (propertyName == "boPhan")
+            {
+                try
+                {
+                    this.tenNguoiQuanLy = this.boPhan.truongBoPhan.TenNhanVien;
+                }
+                catch { }
             }
         }
         int fId;
@@ -63,7 +75,7 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         [XafDisplayName("Họ Và Tên")]
         public string TenNhanVien
         {
-            get { return fTenNhanVien;}
+            get { return fTenNhanVien; }
             set { SetPropertyValue("TenNhanVien", ref fTenNhanVien, value); }
         }
         string fMaNhanVien;
@@ -82,7 +94,7 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         }
         string fEmail;
         [XafDisplayName("E-mail")]
-        [Appearance("Email", Context="Any", FontColor="blue", TargetItems ="email", FontStyle =System.Drawing.FontStyle.Underline)]
+        [Appearance("Email", Context = "Any", FontColor = "blue", TargetItems = "email", FontStyle = System.Drawing.FontStyle.Underline)]
         public string email
         {
             get { return fEmail; }
@@ -97,11 +109,11 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         }
         bool fDaNghiviec = false;
         [XafDisplayName("Đã Nghỉ Việc")]
-        [ModelDefault("AllowEdit","false")]
+        [ModelDefault("AllowEdit", "false")]
         public bool daNghiViec
         {
             get { return fDaNghiviec; }
-            set { SetPropertyValue("daNghiViec",ref fDaNghiviec, value); }
+            set { SetPropertyValue("daNghiViec", ref fDaNghiviec, value); }
         }
         DateTime? fNgayNghiViec;
         [XafDisplayName("Ngày Nghỉ Việc")]
@@ -118,14 +130,21 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             get { return fBoPhan; }
             set { SetPropertyValue("boPhan", ref fBoPhan, value); }
         }
-        Image fHinhAnh;
+        byte[] fHinhAnh;
         [XafDisplayName("Hình Ảnh Cá Nhân")]
         [ImageEditor(ListViewImageEditorMode = ImageEditorMode.PictureEdit, DetailViewImageEditorMode = ImageEditorMode.PictureEdit, ListViewImageEditorCustomHeight = 50)]
-        [ValueConverter(typeof(DevExpress.Xpo.Metadata.ImageValueConverter))]
-        public Image HinhAnh
+        public byte[] HinhAnh
         {
             get { return fHinhAnh; }
             set { SetPropertyValue("HinhAnh", ref fHinhAnh, value); }
+        }
+        [VisibleInListView(false)]
+        [VisibleInDetailView(false)]
+        [NonPersistent]
+        public string ContentHinhAnh
+        {
+            get { return this.HinhAnh != null ? Convert.ToBase64String(this.HinhAnh) : null; }
+            set { HinhAnh = Convert.FromBase64String(value); }
         }
         ChucVu fChucVu;
         [XafDisplayName("Chức Vụ")]
@@ -135,6 +154,7 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             set { SetPropertyValue("chucVuNhanVien", ref fChucVu, value); }
         }
         CaLamViec fCaLamViec;
+        [VisibleInListView(false)]
         [XafDisplayName("Ca Làm Việc")]
         public CaLamViec caLamViec
         {
@@ -148,6 +168,14 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         {
             get { return fMaChamCong; }
             set { SetPropertyValue("MaChamCong", ref fMaChamCong, value); }
+        }
+        string fPassword;
+        [VisibleInListView(false)]
+        [XafDisplayName("Mật Khẩu")]
+        public string password
+        {
+            get { return fPassword; }
+            set { SetPropertyValue("password", ref fPassword, value); }
         }
         public enum GioChamCong
         {
@@ -215,21 +243,15 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 }
             }
         }
-        //public enum DiemDanh
-        //{
-        //    [XafDisplayName("Chưa chấm công")] chua = 0,
-        //    [XafDisplayName("Chấm công thiếu")] thieu = 1,
-        //    [XafDisplayName("Chấm công đủ")] du = 2
-        //}
-        //[XafDisplayName("Tình Trạng Chấm Công")]
-        //public DiemDanh diemDanhNgay
-        //{
-        //    get
-        //    {
-        //        CheckInOut cks = Session.GetObjectByKey<CheckInOut>(new BinaryOperator("NgayCham", DateTime.Now));
-        //        if()
-        //    }
-        //}
+        private string fTenNguoiQuanLy;
+        [VisibleInDetailView(false)]
+        [VisibleInLookupListView(false)]
+        [XafDisplayName("Tên Người Quản Lý")]
+        public string tenNguoiQuanLy
+        {
+            get { return fTenNguoiQuanLy; }
+            set { SetPropertyValue("tenNguoiQuanLy", ref fTenNguoiQuanLy, value); }
+        }
         [XafDisplayName("Mức Lương Hiện Tại")]
         [VisibleInListView(false)]
         public double? mucLuongHienTai
