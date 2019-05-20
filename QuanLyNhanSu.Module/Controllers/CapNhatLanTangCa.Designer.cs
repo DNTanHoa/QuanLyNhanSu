@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            // 
+            // CapNhatLanTangCa
+            // 
+            this.TargetObjectType = typeof(QuanLyNhanSu.Module.BusinessObjects.ThangChamCong);
 
         }
 

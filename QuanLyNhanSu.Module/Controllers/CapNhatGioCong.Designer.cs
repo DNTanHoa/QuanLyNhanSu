@@ -31,7 +31,8 @@
             // 
             // CapNhatGioCong
             // 
-            this.TargetViewId = "NguoiDung_ListView";
+            this.TargetViewId = "ThangChamCong_ListView";
+            this.TypeOfView = typeof(DevExpress.ExpressApp.View);
 
         }
 
