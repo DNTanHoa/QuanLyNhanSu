@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application Logo="ExpressAppLogo" ProtectedContentText="Nội Dung Bị Ẩn Do Phân Quyền" Title="Quản Lý Nhân Sự" Company="Công Ty TNHH Cơ Khi Duy Khanh" Copyright="Duy Anh System Management Solutions Co,Ltd" PreferredLanguage="vi">
+<Application Logo="ExpressAppLogo" ProtectedContentText="Nội Dung Bị Ẩn Do Phân Quyền" Title="Duy Khanh HR" Company="Công Ty TNHH Cơ Khi Duy Khanh" Copyright="Duy Anh System Management Solutions Co,Ltd" PreferredLanguage="vi">
   <ActionDesign>
     <Actions>
       <Action Id="About Info" Caption="Về Chúng Tôi" />
@@ -123,6 +123,14 @@
     <SchemaModule Name="SystemWindowsFormsModule" Version="18.2.6.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
+    <DetailView Id="AuthenticationStandardLogonParameters_DetailView" ImageName="Security_Key">
+      <Items>
+        <StaticImage Id="LogonImage" ImageName="72x72" />
+        <StaticText Id="LogonText" Text="Hệ thống Quản Lý Nhân Sự Công ty Duy Khanh" />
+        <PropertyEditor Id="Password" Caption="Mật Khẩu" />
+        <PropertyEditor Id="UserName" Caption="Tên Đăng Nhập" />
+      </Items>
+    </DetailView>
     <DetailView Id="BoPhan_DetailView" ImageName="BO_WorkflowDefinition" EnableLayoutGroupImages="True">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">

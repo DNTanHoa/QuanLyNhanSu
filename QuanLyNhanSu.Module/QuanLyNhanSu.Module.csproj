@@ -220,6 +220,9 @@
     <EmbeddedResource Include="Controllers\CapNhatNgayCong.resx">
       <DependentUpon>CapNhatNgayCong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\CapNhatNhanVien.resx">
+      <DependentUpon>CapNhatNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controllers\CapNhatThangChamCong.resx">
       <DependentUpon>CapNhatThangChamCong.cs</DependentUpon>
     </EmbeddedResource>

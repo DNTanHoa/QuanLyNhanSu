@@ -31,7 +31,7 @@
             // 
             // CapNhatXinDiTre
             // 
-            this.TargetViewId = "NguoiDung_ListView";
+            this.TargetViewId = "NhanVien_ListView";
 
         }
 
