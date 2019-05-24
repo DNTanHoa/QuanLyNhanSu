@@ -36,15 +36,16 @@
             this.duyetNghiPhep.Caption = "Duyệt Nghỉ";
             this.duyetNghiPhep.ConfirmationMessage = null;
             this.duyetNghiPhep.Id = "duyetNghi";
+            this.duyetNghiPhep.ImageName = "Task";
             this.duyetNghiPhep.TargetObjectType = typeof(QuanLyNhanSu.Module.BusinessObjects.LanNghiPhep);
-            this.duyetNghiPhep.TargetViewType = DevExpress.ExpressApp.ViewType.DetailView;
             this.duyetNghiPhep.ToolTip = null;
-            this.duyetNghiPhep.TypeOfView = typeof(DevExpress.ExpressApp.DetailView);
+            this.duyetNghiPhep.TypeOfView = typeof(DevExpress.ExpressApp.View);
             this.duyetNghiPhep.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.duyetNghiPhep_Execute);
             // 
             // DuyetNghi
             // 
             this.Actions.Add(this.duyetNghiPhep);
+            this.TargetObjectType = typeof(QuanLyNhanSu.Module.BusinessObjects.LanNghiPhep);
 
         }
 

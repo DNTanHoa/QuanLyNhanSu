@@ -28,25 +28,25 @@ namespace QuanLyNhanSu.Module.Controllers
         protected override void OnActivated()
         {
             base.OnActivated();
-            string condition = CriteriaOperator.And(CriteriaOperator.Parse("[ngayDuyet] Is Null")).ToString();
-            CriteriaOperator criteria = CriteriaOperator.Parse(condition);
-            IList<LanTangCa> lanTangCas = ObjectSpace.GetObjects<LanTangCa>(criteria);
-            Console.WriteLine("Cap nhat lan tang ca");
-            foreach (LanTangCa lanTangCa in lanTangCas)
-            {
-                CriteriaOperator criteriaOperator = CriteriaOperator.And(CriteriaOperator.Parse("[nguoiChamCong] = ?", lanTangCa.nguoiTangCa), CriteriaOperator.Parse("[ngay.ngayChamCong] = ?", lanTangCa.ngayTangCa));
-                GioCong gio = ObjectSpace.FindObject<GioCong>(criteriaOperator);
-                if (!Equals(gio, null))
-                {
-                    gio.soGioTangCa = lanTangCa.thoiGianTangCa;
-                    gio.duyetTangCa = false;
-                }
+            //string condition = CriteriaOperator.And(CriteriaOperator.Parse("[ngayDuyet] Is Null")).ToString();
+            //CriteriaOperator criteria = CriteriaOperator.Parse(condition);
+            //IList<LanTangCa> lanTangCas = ObjectSpace.GetObjects<LanTangCa>(criteria);
+            //Console.WriteLine("Cap nhat lan tang ca");
+            //foreach (LanTangCa lanTangCa in lanTangCas)
+            //{
+            //    CriteriaOperator criteriaOperator = CriteriaOperator.And(CriteriaOperator.Parse("[nguoiChamCong] = ?", lanTangCa.nguoiTangCa), CriteriaOperator.Parse("[ngay.ngayChamCong] = ?", lanTangCa.ngayTangCa));
+            //    GioCong gio = ObjectSpace.FindObject<GioCong>(criteriaOperator);
+            //    if (!Equals(gio, null))
+            //    {
+            //        gio.soGioTangCa = lanTangCa.thoiGianTangCa;
+            //        gio.ngayDuyet = lanTangCa.ngayDuyet;
+            //    }
 
-                lanTangCa.gioCong = gio;
-            }
-            ObjectSpace.CommitChanges();
-            ObjectSpace.Refresh();
-            View.Refresh();
+            //    lanTangCa.gioCong = gio;
+            //}
+            //ObjectSpace.CommitChanges();
+            //ObjectSpace.Refresh();
+            //View.Refresh();
             // Perform various tasks depending on the target View.
         }
         protected override void OnViewControlsCreated()

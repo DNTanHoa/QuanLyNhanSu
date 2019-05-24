@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.Module.BusinessObjects
 {
+    [DefaultClassOptions]
     [Persistent(@"NhanVien")]
     [DefaultProperty("TenNhanVien")]
     [XafDisplayName("Nhân Viên")]
@@ -215,21 +216,34 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 }
             }
         }
-        //public enum DiemDanh
-        //{
-        //    [XafDisplayName("Chưa chấm công")] chua = 0,
-        //    [XafDisplayName("Chấm công thiếu")] thieu = 1,
-        //    [XafDisplayName("Chấm công đủ")] du = 2
-        //}
-        //[XafDisplayName("Tình Trạng Chấm Công")]
-        //public DiemDanh diemDanhNgay
-        //{
-        //    get
-        //    {
-        //        CheckInOut cks = Session.GetObjectByKey<CheckInOut>(new BinaryOperator("NgayCham", DateTime.Now));
-        //        if()
-        //    }
-        //}
+        public int soLanBoSungGio
+        {
+            get
+            {
+                return this.lanBoSungGios.Count;
+            }
+        }
+        public int soLanTangCa
+        {
+            get
+            {
+                return this.lanTangCas.Count;
+            }
+        }
+        public int soLanDiTreVeSom
+        {
+            get
+            {
+                return this.lanXinDiTres.Count;
+            }
+        }
+        public int soLanNghiPhep
+        {
+            get
+            {
+                return this.lanNghiPheps.Count;
+            }
+        }
         [XafDisplayName("Mức Lương Hiện Tại")]
         [VisibleInListView(false)]
         public double? mucLuongHienTai

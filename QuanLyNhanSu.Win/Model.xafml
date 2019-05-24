@@ -41,15 +41,22 @@
       </OwnMembers>
     </Class>
   </BOModel>
-  <NavigationItems NavigationStyle="Accordion" ShowImages="True" DefaultChildItemsDisplayStyle="List" StartupNavigationItem="MyDetails">
+  <NavigationItems NavigationStyle="Accordion" ShowImages="True" DefaultChildItemsDisplayStyle="List" StartupNavigationItem="trangchu">
     <Items>
       <Item Id="Default" Caption="Thông Tin Chung" ImageName="Actions_Home" Index="0">
         <Items>
+          <Item Id="trangchu" Caption="Thông Báo" ImageName="BO_Notifications" ViewId="Trang_Chu" Index="0" IsNewNode="True" />
+          <DashboardNavigationItem Id="@059a1c45-96f5-44df-ab58-c99118a1c0fc" DashboardTitle="Dashboard" Caption="Bảng Điều Khiển" Index="1" IsNewNode="True" />
+          <Item Id="NguoiDung_ListView" Index="2" />
+          <Item Id="EmployeeRole_ListView" Index="3" />
+          <Item Id="BoPhan_ListView" Removed="True" />
           <Item Id="CheckInOut_ListView" Removed="True" />
-          <Item Id="GioCong_ListView" Removed="True" />
+          <Item Id="LanBoSungGio_ListView" Removed="True" />
+          <Item Id="LanNghiPhep_ListView" Removed="True" />
+          <Item Id="LanTangCa_ListView" Removed="True" />
+          <Item Id="LanXinDiTre_ListView" Removed="True" />
           <Item Id="MyDetails" Caption="Thông Tin Đăng Nhập" />
-          <Item Id="NgayTinhCong_ListView" Removed="True" />
-          <Item Id="ThangChamCong_ListView" Removed="True" />
+          <Item Id="NhanVien_ListView" Removed="True" />
         </Items>
       </Item>
       <Item Id="QuanLyNhanVien" Index="1" Caption="Quản Lý Nhân Viên" ImageName="BO_Customer" IsNewNode="True">
@@ -66,7 +73,7 @@
           <Item Id="HopDongNhanVien" Caption="Hợp Đồng Nhân Viên" ImageName="BO_WorkflowDefinition" ViewId="HopDongLaoDong_ListView" IsNewNode="True" />
         </Items>
       </Item>
-      <Item Id="QuanLyChamCong" Caption="Quản Lý Chấm Công" ImageName="BO_Appearance" IsNewNode="True">
+      <Item Id="QuanLyChamCong" Caption="Quản Lý Chấm Công" ImageName="BO_Appearance" Index="3" IsNewNode="True">
         <Items IsNewNode="True">
           <Item Id="Holidays" Caption="Ngày Lễ" ImageName="ColumnTotalsPosition" ViewId="NgayLe_ListView" IsNewNode="True" />
           <Item Id="NgayChamCong" Caption="Bảng Công" ImageName="BO_Appearance" ViewId="" IsNewNode="True">
@@ -79,6 +86,32 @@
           <Item Id="ThietBiChamCong" Caption="Thiết Bị Chấm Công" ImageName="BO_Security_Permission_Model" ViewId="MayChamCong_ListView" IsNewNode="True" />
         </Items>
       </Item>
+      <Item Id="TaoVaDuyetDon" Caption="Tạo Và Duyệt Đơn" ImageName="BO_Document" Index="4" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="TaoDon" Caption="Tạo Các Mẫu Đơn" ImageName="Paste" Index="0" IsNewNode="True">
+            <Items IsNewNode="True">
+              <Item Id="BoSungGio" Caption="Bổ Sung Giờ" ImageName="Paste" ViewId="LanBoSungGio_ListView" IsNewNode="True" />
+              <Item Id="DiTreVeSom" Caption="Đi Trễ Về Sớm" ImageName="Paste" ViewId="LanXinDiTre_ListView" IsNewNode="True" />
+              <Item Id="nghiPhep" Caption="Nghỉ Phép" ImageName="Paste" ViewId="LanNghiPhep_ListView" IsNewNode="True" />
+              <Item Id="TangCa" Caption="Tăng Ca" ImageName="Paste" ViewId="LanTangCa_ListView" IsNewNode="True" />
+            </Items>
+          </Item>
+          <Item Id="DuyetDon" Caption="Duyệt Đơn" ImageName="Task" Index="1" IsNewNode="True">
+            <Items IsNewNode="True">
+              <Item Id="duyetnghiPhep" Caption="Nghỉ Phép" ImageName="Task" ViewId="LanNghiPhep_ListView" Index="0" IsNewNode="True" />
+              <Item Id="DuyetBoSungGio" Caption="Bổ Sung Giờ" ViewId="LanBoSungGio_ListView" ImageName="Task" Index="1" IsNewNode="True" />
+              <Item Id="DuyetDiTreVeSom" ImageName="Task" ViewId="LanXinDiTre_ListView" Caption="Đi Trễ Về Sớm" Index="2" IsNewNode="True" />
+              <Item Id="DuyetTangCa" ImageName="Task" ViewId="LanTangCa_ListView" Caption="Tăng Ca" IsNewNode="True" />
+            </Items>
+          </Item>
+        </Items>
+      </Item>
+      <Item Id="Dashboard" ViewId="DashboardData_ListView" Index="5" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="abc" ViewId="DashboardData_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Reports" Removed="True" />
     </Items>
   </NavigationItems>
   <Options UIType="MultipleWindowSDI" FormStyle="Ribbon" ShowTabImage="False">
@@ -234,7 +267,6 @@
         <ColumnInfo Id="diTreChieuSaved" PropertyName="diTreChieuSaved" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="diTreSang" PropertyName="diTreSang" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="diTreSangSaved" PropertyName="diTreSangSaved" Width="70" Index="-1" IsNewNode="True" />
-        <ColumnInfo Id="duyetTangCa" PropertyName="duyetTangCa" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="soGioCoBanSaved" PropertyName="soGioCoBanSaved" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="soGioCuoiCa" PropertyName="soGioCuoiCa" Width="70" Index="-1" IsNewNode="True" />
@@ -271,7 +303,6 @@
         <ColumnInfo Id="diTreChieuSaved" PropertyName="diTreChieuSaved" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="diTreSang" PropertyName="diTreSang" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="diTreSangSaved" PropertyName="diTreSangSaved" Width="70" Index="-1" IsNewNode="True" />
-        <ColumnInfo Id="duyetTangCa" PropertyName="duyetTangCa" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="soGioCoBanSaved" PropertyName="soGioCoBanSaved" Width="70" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="soGioCuoiCa" PropertyName="soGioCuoiCa" Width="70" Index="-1" IsNewNode="True" />
@@ -336,6 +367,74 @@
         <ColumnInfo Id="mucLuong" Removed="True" />
       </Columns>
     </ListView>
+    <DetailView Id="LanBoSungGio_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="LanBoSungGio" Caption="Lần Bổ Sung Giờ" RelativeSize="27.599243856332702">
+              <LayoutGroup Id="LanBoSungGio_col1" RelativeSize="50">
+                <LayoutItem Id="nguoiBoSungGio" RelativeSize="28.571428571428573" Index="0" />
+                <LayoutItem Id="thoiGianBoSung" RelativeSize="21.428571428571427" Index="1" />
+                <LayoutItem Id="lyDo" ViewItem="lyDo" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                <LayoutItem Id="thoiGianRaGiuaCa" RelativeSize="21.428571428571427" Index="2" Removed="True" />
+                <LayoutItem Id="thoiGianVao" RelativeSize="17.647058823529413" Index="2" Removed="True" />
+                <LayoutItem Id="thoiGianVaoGiuaCa" ViewItem="thoiGianVaoGiuaCa" Index="2" RelativeSize="58.8235294117647" Removed="True" />
+                <LayoutItem Id="ghiChu" ViewItem="ghiChu" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
+                <LayoutItem Id="Id" RelativeSize="4.5197740112994351" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="LanBoSungGio_col2" RelativeSize="50">
+                <LayoutItem Id="thoiGianVao" ViewItem="thoiGianVao" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
+                <LayoutItem Id="ngayDuyet" RelativeSize="4.9281314168377826" Index="1" Removed="True" />
+                <LayoutItem Id="thoiGianRaGiuaCa" ViewItem="thoiGianRaGiuaCa" Index="1" RelativeSize="21.428571428571427" IsNewNode="True" />
+                <LayoutItem Id="thoiGianVaoGiuaCa" ViewItem="thoiGianVaoGiuaCa" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                <LayoutItem Id="thoiGianTanCa" RelativeSize="28.571428571428573" Index="3" />
+                <LayoutItem Id="ghiChu" RelativeSize="23.529411764705884" Index="4" Removed="True" />
+                <LayoutItem Id="lyDo" RelativeSize="15" Index="4" Removed="True" />
+                <LayoutItem Id="nguoiDuyet" RelativeSize="4.9281314168377826" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="Item3" Index="1" RelativeSize="10.396975425330814" IsNewNode="True" />
+            <LayoutGroup Id="Item1" ShowCaption="True" Caption="Duyệt" CaptionLocation="Top" Index="2" RelativeSize="62.003780718336486" IsNewNode="True">
+              <LayoutItem Id="nguoiDuyet" ViewItem="nguoiDuyet" Index="0" RelativeSize="10.884353741496598" IsNewNode="True" />
+              <LayoutItem Id="ngayDuyet" ViewItem="ngayDuyet" Index="1" RelativeSize="8.16326530612245" IsNewNode="True" />
+              <LayoutItem Id="Item2" Index="2" RelativeSize="80.952380952380949" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="LanBoSungGio_ListView_CanDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanBoSungGio" Criteria="[ngayDuyet] Is Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="gioCong" PropertyName="gioCong" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiBoSungGio" PropertyName="nguoiBoSungGio" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianBoSung" PropertyName="thoiGianBoSung" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianVao" PropertyName="thoiGianVao" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianRaGiuaCa" PropertyName="thoiGianRaGiuaCa" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianVaoGiuaCa" PropertyName="thoiGianVaoGiuaCa" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianTanCa" PropertyName="thoiGianTanCa" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="lyDo" PropertyName="lyDo" Width="70" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="9" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="LanBoSungGio_ListView_DaDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanBoSungGio" Criteria="[ngayDuyet] Is Not Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="gioCong" PropertyName="gioCong" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiBoSungGio" PropertyName="nguoiBoSungGio" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianBoSung" PropertyName="thoiGianBoSung" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianVao" PropertyName="thoiGianVao" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianRaGiuaCa" PropertyName="thoiGianRaGiuaCa" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianVaoGiuaCa" PropertyName="thoiGianVaoGiuaCa" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianTanCa" PropertyName="thoiGianTanCa" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="lyDo" PropertyName="lyDo" Width="70" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="9" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <DetailView Id="LanNghiPhep_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -377,34 +476,61 @@
       </Layout>
     </DetailView>
     <ListView Id="LanNghiPhep_ListView" Criteria="" />
+    <ListView Id="LanNghiPhep_ListView_CanDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanNghiPhep" Criteria="[ngayDuyet] Is Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="soNgayNghi" PropertyName="soNgayNghi" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiNghiPhep" PropertyName="nguoiNghiPhep" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ngayTaoDonXin" PropertyName="ngayTaoDonXin" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="ngayNghi" PropertyName="ngayNghi" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="duyetBGD" PropertyName="duyetBGD" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="ngayBGDDuyet" PropertyName="ngayBGDDuyet" Width="70" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="7" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="LanNghiPhep_ListView_DaDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanNghiPhep" Criteria="[ngayDuyet] Is Not Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="soNgayNghi" PropertyName="soNgayNghi" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiNghiPhep" PropertyName="nguoiNghiPhep" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ngayTaoDonXin" PropertyName="ngayTaoDonXin" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="ngayNghi" PropertyName="ngayNghi" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="duyetBGD" PropertyName="duyetBGD" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="ngayBGDDuyet" PropertyName="ngayBGDDuyet" Width="70" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="7" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <DetailView Id="LanTangCa_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="LanTangCa" RelativeSize="32.136105860113425" Caption="Lần Tăng Ca">
-              <LayoutGroup Id="LanTangCa_col1" RelativeSize="49.782608695652172">
-                <LayoutItem Id="nguoiTangCa" RelativeSize="23.529411764705884" Index="0" />
-                <LayoutItem Id="ngayTangCa" RelativeSize="17.647058823529413" Index="1" />
-                <LayoutItem Id="loaiTangCa" RelativeSize="17.647058823529413" Index="2" />
-                <LayoutItem Id="heSoNhanGio" RelativeSize="17.647058823529413" Index="3" />
-                <LayoutItem Id="gioCong" ViewItem="gioCong" Index="4" RelativeSize="23.529411764705884" IsNewNode="True" />
+            <LayoutGroup Id="LanTangCa" RelativeSize="27.599243856332702" Caption="Lần Tăng Ca">
+              <LayoutGroup Id="LanTangCa_col1" RelativeSize="49.689440993788821">
+                <LayoutItem Id="nguoiTangCa" RelativeSize="28.571428571428573" Index="0" />
+                <LayoutItem Id="ngayTangCa" RelativeSize="21.428571428571427" Index="1" />
+                <LayoutItem Id="loaiTangCa" RelativeSize="21.428571428571427" Index="2" />
+                <LayoutItem Id="heSoNhanGio" RelativeSize="28.571428571428573" Index="3" />
                 <LayoutItem Id="Id" RelativeSize="23.529411764705884" Removed="True" />
                 <LayoutItem Id="thoiGianBatDau" RelativeSize="20" Removed="True" />
               </LayoutGroup>
-              <LayoutGroup Id="LanTangCa_col2" RelativeSize="50.217391304347828">
-                <LayoutItem Id="thoiGianBatDau" ViewItem="thoiGianBatDau" Index="0" RelativeSize="23.529411764705884" IsNewNode="True" />
+              <LayoutGroup Id="LanTangCa_col2" RelativeSize="50.310559006211179">
+                <LayoutItem Id="thoiGianBatDau" ViewItem="thoiGianBatDau" Index="0" RelativeSize="28.571428571428573" IsNewNode="True" />
                 <LayoutItem Id="ngayDuyet" RelativeSize="15" Index="1" Removed="True" />
-                <LayoutItem Id="thoiGianKetThuc" RelativeSize="17.647058823529413" Index="1" />
-                <LayoutItem Id="thoiGianTangCa" RelativeSize="17.647058823529413" Index="2" />
-                <LayoutItem Id="ghiChu" RelativeSize="41.1764705882353" Index="3" />
+                <LayoutItem Id="thoiGianKetThuc" RelativeSize="21.428571428571427" Index="1" />
+                <LayoutItem Id="thoiGianTangCa" RelativeSize="21.428571428571427" Index="2" />
+                <LayoutItem Id="ghiChu" RelativeSize="28.571428571428573" Index="3" />
                 <LayoutItem Id="nguoiDuyet" RelativeSize="15" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
-            <LayoutItem Id="Item3" Index="1" RelativeSize="9.0737240075614363" IsNewNode="True" />
-            <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="58.790170132325144" Caption="Duyệt" IsNewNode="True">
-              <LayoutItem Id="nguoiDuyet" ViewItem="nguoiDuyet" Index="0" RelativeSize="11.552346570397113" IsNewNode="True" />
-              <LayoutItem Id="ngayDuyet" ViewItem="ngayDuyet" Index="1" RelativeSize="8.6642599277978345" IsNewNode="True" />
-              <LayoutItem Id="Item1" Index="2" RelativeSize="79.783393501805051" IsNewNode="True" />
+            <LayoutItem Id="Item3" Index="1" RelativeSize="9.640831758034027" IsNewNode="True" />
+            <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="2" RelativeSize="62.759924385633269" Caption="Duyệt" IsNewNode="True">
+              <LayoutItem Id="nguoiDuyet" ViewItem="nguoiDuyet" Index="0" RelativeSize="10.738255033557048" IsNewNode="True" />
+              <LayoutItem Id="ngayDuyet" ViewItem="ngayDuyet" Index="1" RelativeSize="8.053691275167786" IsNewNode="True" />
+              <LayoutItem Id="Item1" Index="2" RelativeSize="81.208053691275168" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
         </LayoutGroup>
@@ -418,7 +544,97 @@
         <ColumnInfo Id="thoiGianTangCa" Index="6" SortIndex="0" SortOrder="Descending" />
       </Columns>
     </ListView>
+    <ListView Id="LanTangCa_ListView_CanDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanTangCa" Criteria="[ngayDuyet] Is Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="gioCong" PropertyName="gioCong" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiTangCa" PropertyName="nguoiTangCa" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ngayTangCa" PropertyName="ngayTangCa" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="loaiTangCa" PropertyName="loaiTangCa" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="heSoNhanGio" PropertyName="heSoNhanGio" Width="50" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianBatDau" PropertyName="thoiGianBatDau" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianKetThuc" PropertyName="thoiGianKetThuc" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianTangCa" PropertyName="thoiGianTangCa" Width="50" Index="6" SortIndex="0" SortOrder="Descending" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="LanTangCa_ListView_DaDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanTangCa" Criteria="[ngayDuyet] Is Not Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="gioCong" PropertyName="gioCong" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="nguoiTangCa" PropertyName="nguoiTangCa" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="ngayTangCa" PropertyName="ngayTangCa" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="loaiTangCa" PropertyName="loaiTangCa" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="heSoNhanGio" PropertyName="heSoNhanGio" Width="50" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianBatDau" PropertyName="thoiGianBatDau" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianKetThuc" PropertyName="thoiGianKetThuc" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="thoiGianTangCa" PropertyName="thoiGianTangCa" Width="50" Index="6" SortIndex="0" SortOrder="Descending" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="LanXinDiTre_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="LanXinDiTre" RelativeSize="23.062381852551987" Caption="Lần Xin Đi Trễ">
+              <LayoutGroup Id="LanXinDiTre_col1" RelativeSize="62.13389121338912">
+                <LayoutItem Id="ngayTaoPhieu" Index="0" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="nguoiTaoPhieu" Index="1" RelativeSize="27.272727272727273" />
+                <LayoutItem Id="loaiPhep" Index="2" RelativeSize="36.363636363636367" />
+                <LayoutItem Id="ngayXinPhep" ViewItem="ngayXinPhep" Index="3" RelativeSize="28.571428571428573" Removed="True" />
+                <LayoutItem Id="Id" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="LanXinDiTre_col2" RelativeSize="37.86610878661088">
+                <LayoutItem Id="ngayDuyet" RelativeSize="6.5708418891170428" Index="0" Removed="True" />
+                <LayoutItem Id="ngayXinPhep" ViewItem="ngayXinPhep" Index="0" RelativeSize="36.363636363636367" IsNewNode="True" />
+                <LayoutItem Id="lyDo" RelativeSize="27.272727272727273" Index="1" />
+                <LayoutItem Id="ghiChu" RelativeSize="36.363636363636367" Index="2" />
+                <LayoutItem Id="nguoiDuyet" RelativeSize="6.5708418891170428" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="Item3" Index="1" RelativeSize="11.909262759924385" IsNewNode="True" />
+            <LayoutGroup Id="Item1" ShowCaption="True" Caption="Duyệt" CaptionLocation="Top" Index="2" RelativeSize="17.013232514177695" IsNewNode="True">
+              <LayoutItem Id="nguoiDuyet" ViewItem="nguoiDuyet" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="ngayDuyet" ViewItem="ngayDuyet" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="Item2" Index="3" RelativeSize="48.015122873345938" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="LanXinDiTre_ListView" Criteria="" />
+    <ListView Id="LanXinDiTre_ListView_CanDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanXinDiTre" Criteria="[ngayDuyet] Is Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="gioCong" PropertyName="gioCong" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ngayTaoPhieu" PropertyName="ngayTaoPhieu" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="nguoiTaoPhieu" PropertyName="nguoiTaoPhieu" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="loaiPhep" PropertyName="loaiPhep" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="ngayXinPhep" PropertyName="ngayXinPhep" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="lyDo" PropertyName="lyDo" Width="70" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="7" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="LanXinDiTre_ListView_DaDuyet" ClassName="QuanLyNhanSu.Module.BusinessObjects.LanXinDiTre" Criteria="[ngayDuyet] Is Not Null" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="gioCong" PropertyName="gioCong" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ngayTaoPhieu" PropertyName="ngayTaoPhieu" Width="70" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="nguoiTaoPhieu" PropertyName="nguoiTaoPhieu" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="loaiPhep" PropertyName="loaiPhep" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="ngayXinPhep" PropertyName="ngayXinPhep" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="nguoiDuyet" PropertyName="nguoiDuyet" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="ngayDuyet" PropertyName="ngayDuyet" Width="70" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="lyDo" PropertyName="lyDo" Width="70" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ghiChu" PropertyName="ghiChu" Width="70" Index="7" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <DetailView Id="LoaiHopDong_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -683,10 +899,17 @@
     </DetailView>
     <ListView Id="NhanVien_ListView" ImageName="BO_Contact" MasterDetailMode="ListViewAndDetailView" DataAccessMode="DataView" MasterDetailView="NhanVien_DetailView_Detail">
       <Columns>
+        <ColumnInfo Id="dienThoaiLienLac" Index="-1" />
+        <ColumnInfo Id="email" Index="-1" />
         <ColumnInfo Id="IsChecked" Index="-1" />
+        <ColumnInfo Id="soLanBoSungGio" Index="-1" />
+        <ColumnInfo Id="soLanDiTreVeSom" Index="-1" />
+        <ColumnInfo Id="soLanNghiPhep" Index="-1" />
+        <ColumnInfo Id="soLanTangCa" Index="-1" />
         <ColumnInfo Id="soNgayPhepConLai" Index="-1" />
-        <ColumnInfo Id="chucVuNhanVien" Index="4" />
-        <ColumnInfo Id="caLamViec" Index="5" />
+        <ColumnInfo Id="TenNhanVien" Width="329" />
+        <ColumnInfo Id="chucVuNhanVien" Index="2" />
+        <ColumnInfo Id="caLamViec" Index="3" />
         <ColumnInfo Id="boPhan" Removed="True" />
         <ColumnInfo Id="cmnd" Removed="True" />
         <ColumnInfo Id="daNghiViec" Removed="True" />
@@ -696,6 +919,16 @@
         <ColumnInfo Id="ngayNghiViec" Removed="True" />
       </Columns>
     </ListView>
+    <DashboardView Id="Notification" Caption="Thông Báo" IsNewNode="True">
+      <Items IsNewNode="True">
+        <ControlDetailItem Id="BaseControl" ControlTypeName="QuanLyNhanSu.Module.Win.UserControls.BaseControl" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" IsNewNode="True">
+          <LayoutItem Id="itemView" ViewItem="itemView" Index="0" IsNewNode="True" />
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
     <DetailView Id="ThangChamCong_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
@@ -742,5 +975,15 @@
         <ColumnInfo Id="ngayChamCong" SortIndex="-1" SortOrder="None" />
       </Columns>
     </ListView>
+    <DashboardView Id="Trang_Chu" Caption="Trang Chủ" IsNewNode="True">
+      <Items IsNewNode="True">
+        <ControlDetailItem Id="thongBao" ControlTypeName="QuanLyNhanSu.Win.UserControls.ThongBao" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" TextAlignMode="AlignWithChildren" Index="0" RelativeSize="100" Caption="Main(1)" IsNewNode="True">
+          <LayoutItem Id="thongBao" ShowCaption="False" ViewItem="thongBao" Index="0" RelativeSize="100" IsNewNode="True" />
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
   </Views>
 </Application>

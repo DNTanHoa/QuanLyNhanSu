@@ -36,15 +36,16 @@
             this.Duyet.Caption = "Duyệt Tăng Ca";
             this.Duyet.ConfirmationMessage = null;
             this.Duyet.Id = "duyetTangCa";
+            this.Duyet.ImageName = "Task";
             this.Duyet.TargetObjectType = typeof(QuanLyNhanSu.Module.BusinessObjects.LanTangCa);
-            this.Duyet.TargetViewType = DevExpress.ExpressApp.ViewType.DetailView;
             this.Duyet.ToolTip = null;
-            this.Duyet.TypeOfView = typeof(DevExpress.ExpressApp.DetailView);
+            this.Duyet.TypeOfView = typeof(DevExpress.ExpressApp.View);
             this.Duyet.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.Duyet_Execute);
             // 
             // DuyetTangCa
             // 
             this.Actions.Add(this.Duyet);
+            this.TargetObjectType = typeof(QuanLyNhanSu.Module.BusinessObjects.LanTangCa);
 
         }
 

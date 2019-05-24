@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.Module.BusinessObjects
 {
+    [DefaultClassOptions]
     [Persistent(@"LanTangCa")]
     [XafDisplayName("Lần Tăng Ca")]
     [Appearance("ngayDuyet", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "nguoiTangCa", Criteria = "ngayDuyet = null")]
@@ -89,6 +90,8 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         }
         NguoiDung fNguoiDuyet;
         [XafDisplayName("Người Duyệt")]
+        [ModelDefault("AllowEdit", "false")]
+
         public NguoiDung nguoiDuyet
         {
             get { return fNguoiDuyet; }
@@ -96,6 +99,8 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         }
         DateTime? fNgayDuyet;
         [XafDisplayName("Ngày Duyệt")]
+        [ModelDefault("AllowEdit", "false")]
+
         public DateTime? ngayDuyet
         {
             get { return fNgayDuyet; }

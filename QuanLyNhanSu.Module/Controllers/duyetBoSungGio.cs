@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
@@ -13,15 +14,14 @@ using DevExpress.ExpressApp.Templates;
 using DevExpress.ExpressApp.Utils;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
-using DevExpress.Xpo;
 using QuanLyNhanSu.Module.BusinessObjects;
 
 namespace QuanLyNhanSu.Module.Controllers
 {
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppViewControllertopic.aspx.
-    public partial class DuyetTangCa : ViewController
+    public partial class duyetBoSungGio : ViewController
     {
-        public DuyetTangCa()
+        public duyetBoSungGio()
         {
             InitializeComponent();
             // Target required Views (via the TargetXXX properties) and create their Actions.
@@ -42,19 +42,36 @@ namespace QuanLyNhanSu.Module.Controllers
             base.OnDeactivated();
         }
 
-        private void Duyet_Execute(object sender, SimpleActionExecuteEventArgs e)
+        private void boSungGio_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
-            LanTangCa lanTangCa = (LanTangCa)View.CurrentObject;
-            lanTangCa.ngayDuyet = DateTime.Today;
-            lanTangCa.nguoiDuyet = lanTangCa.Session.GetObjectByKey<NguoiDung>(SecuritySystem.CurrentUserId);
+            LanBoSungGio lanXinPhep = (LanBoSungGio)View.CurrentObject;
 
-            CriteriaOperator criteriaOperator = CriteriaOperator.And(CriteriaOperator.Parse("[nguoiChamCong] = ?", lanTangCa.nguoiTangCa), CriteriaOperator.Parse("[ngay.ngayChamCong] = ?", lanTangCa.ngayTangCa));
+            lanXinPhep.ngayDuyet = DateTime.Now;
+            lanXinPhep.nguoiDuyet = lanXinPhep.Session.GetObjectByKey<NguoiDung>(SecuritySystem.CurrentUserId);
+            MessageBox.Show("Đã Duyệt Thành Công");
+
+            CriteriaOperator criteriaOperator = CriteriaOperator.And(CriteriaOperator.Parse("[nguoiChamCong] = ?", lanXinPhep.nguoiBoSungGio), CriteriaOperator.Parse("[ngay.ngayChamCong] = ?", lanXinPhep.thoiGianBoSung));
             GioCong gio = ObjectSpace.FindObject<GioCong>(criteriaOperator);
             if (!Equals(gio, null))
             {
-                gio.soGioTangCa = lanTangCa.thoiGianTangCa;
-                gio.ngayDuyet = lanTangCa.ngayDuyet;
-                lanTangCa.gioCong = gio;
+                if (!Equals(lanXinPhep.thoiGianVao, null))
+                {
+                    gio.thoiGianVaoCaSaved = lanXinPhep.thoiGianVao;
+                }
+                if (!Equals(lanXinPhep.thoiGianRaGiuaCa, null))
+                {
+                    gio.thoiGianRaGiuaCaSaved = lanXinPhep.thoiGianRaGiuaCa;
+                }
+                if (!Equals(lanXinPhep.thoiGianVaoGiuaCa, null))
+                {
+                    gio.thoiGianVaoGiuaCaSaved = lanXinPhep.thoiGianVaoGiuaCa;
+                }
+                if (!Equals(lanXinPhep.thoiGianTanCa, null))
+                {
+                    gio.thoiGianTanCaSaved = lanXinPhep.thoiGianTanCa;
+                }
+                gio.ngayDuyet = lanXinPhep.ngayDuyet;
+                lanXinPhep.gioCong = gio;
             }
 
             ObjectSpace.CommitChanges();

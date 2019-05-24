@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
-  <NavigationItems Id="NavigationItems">
-    <Items Id="Items">
-      <Item Id="Default">
-        <Items Id="Items">
-          <Item Id="NgayTinhCong_ListView" Removed="True" />
-        </Items>
-      </Item>
-    </Items>
-  </NavigationItems>
   <Views Id="Views">
     <DetailView Id="LanNghiPhep_DetailView">
       <Layout Id="Layout">

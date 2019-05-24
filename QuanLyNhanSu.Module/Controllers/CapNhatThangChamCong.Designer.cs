@@ -31,7 +31,7 @@
             // 
             // CapNhatThangChamCong
             // 
-            this.TargetViewId = "NguoiDung_ListView";
+            this.TargetViewId = "Trang_Chu";
 
         }
 

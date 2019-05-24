@@ -1,4 +1,6 @@
-﻿using DevExpress.ExpressApp.DC;
+﻿using DevExpress.ExpressApp.ConditionalAppearance;
+using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System;
@@ -9,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.Module.BusinessObjects
 {
+    [DefaultClassOptions]
     [Persistent(@"LanNghiPhep")]
     [XafDisplayName("Lần Nghỉ Phép")]
+    [Appearance("ngayDuyet", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "nguoiNghiPhep", Criteria = "ngayDuyet = null")]
     public class LanNghiPhep:XPLiteObject
     {
         public LanNghiPhep(Session session):base(session)
@@ -63,6 +67,8 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         }
         NguoiDung fNguoiDuyet;
         [XafDisplayName("Người Duyệt")]
+        [ModelDefault("AllowEdit", "false")]
+
         public NguoiDung nguoiDuyet
         {
             get { return fNguoiDuyet; }
@@ -70,6 +76,8 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         }
         DateTime? fNgayDuyet;
         [XafDisplayName("Ngày Duyệt")]
+        [ModelDefault("AllowEdit", "false")]
+
         public DateTime? ngayDuyet
         {
             get { return fNgayDuyet; }
