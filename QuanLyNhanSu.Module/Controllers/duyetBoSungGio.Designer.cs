@@ -1,6 +1,6 @@
 ﻿namespace QuanLyNhanSu.Module.Controllers
 {
-    partial class CapNhatXinDiTre
+    partial class duyetBoSungGio
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.boSungGio = new DevExpress.ExpressApp.Actions.SimpleAction(this.components);
             // 
-            // CapNhatXinDiTre
+            // boSungGio
             // 
-            this.TargetViewId = "NhanVien_ListView";
+            this.boSungGio.Caption = "Duyệt Đơn";
+            this.boSungGio.ConfirmationMessage = null;
+            this.boSungGio.Id = "f8de6fa6-9f85-45e1-8762-c796bf77de30";
+            this.boSungGio.ImageName = "Task";
+            this.boSungGio.TargetObjectType = typeof(QuanLyNhanSu.Module.BusinessObjects.LanBoSungGio);
+            this.boSungGio.ToolTip = null;
+            this.boSungGio.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.boSungGio_Execute);
+            // 
+            // duyetBoSungGio
+            // 
+            this.Actions.Add(this.boSungGio);
 
         }
 
         #endregion
+
+        private DevExpress.ExpressApp.Actions.SimpleAction boSungGio;
     }
 }

@@ -12,6 +12,8 @@ using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.BaseImpl.PermissionPolicy;
 using QuanLyNhanSu.Module.BusinessObjects;
+using QuanLyNhanSu.Module.Properties;
+using DevExpress.ExpressApp.Dashboards;
 
 namespace QuanLyNhanSu.Module.DatabaseUpdate {
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppUpdatingModuleUpdatertopic.aspx
@@ -21,6 +23,7 @@ namespace QuanLyNhanSu.Module.DatabaseUpdate {
         }
         public override void UpdateDatabaseAfterUpdateSchema() {
             base.UpdateDatabaseAfterUpdateSchema();
+            DashboardsModule.AddDashboardData<DashboardData>(ObjectSpace, "HRM", Resources.HRM);
 
             EmployeeRole adminEmployeeRole = ObjectSpace.FindObject<EmployeeRole>(new BinaryOperator("Name", SecurityStrategy.AdministratorRoleName));
             if (adminEmployeeRole == null)

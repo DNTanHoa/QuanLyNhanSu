@@ -48,6 +48,7 @@
     <Reference Include="DevExpress.ExpressApp.CloneObject.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.ExpressApp.Dashboards.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Reports.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Security.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -171,6 +172,18 @@
     <Compile Include="Controllers\CapNhatXinDiTre.Designer.cs">
       <DependentUpon>CapNhatXinDiTre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\duyetBoSungGio.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\duyetBoSungGio.Designer.cs">
+      <DependentUpon>duyetBoSungGio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\DuyetDiTreVeSom.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\DuyetDiTreVeSom.Designer.cs">
+      <DependentUpon>DuyetDiTreVeSom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\DuyetNghi.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -191,6 +204,11 @@
       <DependentUpon>Module.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controllers\CapNhatGioCong.resx">
@@ -202,11 +220,20 @@
     <EmbeddedResource Include="Controllers\CapNhatNgayCong.resx">
       <DependentUpon>CapNhatNgayCong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\CapNhatNhanVien.resx">
+      <DependentUpon>CapNhatNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controllers\CapNhatThangChamCong.resx">
       <DependentUpon>CapNhatThangChamCong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controllers\CapNhatXinDiTre.resx">
       <DependentUpon>CapNhatXinDiTre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\duyetBoSungGio.resx">
+      <DependentUpon>duyetBoSungGio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\DuyetDiTreVeSom.resx">
+      <DependentUpon>DuyetDiTreVeSom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controllers\DuyetNghi.resx">
       <DependentUpon>DuyetNghi.cs</DependentUpon>
@@ -220,6 +247,10 @@
       <DependentUpon>Module.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -255,7 +286,11 @@
     <None Include="FunctionalTests\config.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\HRM.xml" />
     <Content Include="Welcome.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserControl\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

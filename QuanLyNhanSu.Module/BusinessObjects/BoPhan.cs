@@ -1,9 +1,11 @@
 ﻿using DevExpress.ExpressApp.DC;
+using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using System.ComponentModel;
 
 namespace QuanLyNhanSu.Module.BusinessObjects
 {
+    [DefaultClassOptions]
     [Persistent(@"BoPhan")]
     [DefaultProperty("tenBoPhan")]
     [XafDisplayName("Bộ Phận")]

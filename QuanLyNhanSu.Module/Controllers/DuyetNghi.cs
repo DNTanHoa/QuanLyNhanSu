@@ -45,31 +45,11 @@ namespace QuanLyNhanSu.Module.Controllers
         private void duyetNghiPhep_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             LanNghiPhep lanNghiPhep = (LanNghiPhep)View.CurrentObject;
-            //string condition = CriteriaOperator.And(CriteriaOperator.Parse("[nguoiNghiPhep] = ?",lanNghiPhep.nguoiNghiPhep), CriteriaOperator.Parse("GetMonth([ngayNghi])",DateTime.Today.Month)).ToString();
-            CriteriaOperator criteria = CriteriaOperator.And(CriteriaOperator.Parse("[nguoiNghiPhep] = ?", lanNghiPhep.nguoiNghiPhep), CriteriaOperator.Parse("IsThisMonth([ngayNghi])"));
-            IList<LanNghiPhep> lanNghiPheps = ObjectSpace.GetObjects<LanNghiPhep>(criteria);
-            CriteriaOperator criteriaOperator = CriteriaOperator.And(CriteriaOperator.Parse("[nguoiNghiPhep] = ?", lanNghiPhep.nguoiNghiPhep), CriteriaOperator.Parse("IsThisMonth([ngayNghi])"), CriteriaOperator.Parse("[ngayDuyet] Is Not Null"));
-            IList<LanNghiPhep> daDuyets = ObjectSpace.GetObjects<LanNghiPhep>(criteriaOperator);
 
             lanNghiPhep.ngayDuyet = DateTime.Today;
             lanNghiPhep.nguoiDuyet = lanNghiPhep.Session.GetObjectByKey<NguoiDung>(SecuritySystem.CurrentUserId);
             MessageBox.Show("Đã Duyệt Thành Công");
 
-            //if (lanNghiPhep.Session.GetObjectByKey<NguoiDung>(SecuritySystem.CurrentUserId).EmployeeRoles.)
-            //{
-            //    if((lanNghiPheps.Count >= 3) && (daDuyets.Count >= 2))
-            //    {
-            //        MessageBox.Show("Không Được phép duyệt, vì đã nghỉ 2 ngày trước đó");
-
-            //    }
-            //    else
-            //    {
-            //        lanNghiPhep.ngayDuyet = DateTime.Today;
-            //        lanNghiPhep.nguoiDuyet = lanNghiPhep.Session.GetObjectByKey<NguoiDung>(SecuritySystem.CurrentUserId);
-            //        MessageBox.Show("Đã Duyệt Thành Công");
-            //        MessageBox.Show(daDuyets.Count.ToString());
-            //    }
-            //}
             ObjectSpace.CommitChanges();
             ObjectSpace.Refresh();
             View.Refresh();

@@ -20,7 +20,6 @@ namespace QuanLyNhanSu.Module.BusinessObjects
     [Appearance("veSomSang", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianRaGiuaCa", Criteria = "veSomSang != 0")]
     [Appearance("veSomChieu", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "thoiGianTanCa", Criteria = "veSomChieu != 0")]
     [Appearance("soLanVeSom", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "soLanVeSom", Criteria = "soLanVeSom != 0")]
-    [Appearance("duyetTangCa", BackColor = "red", FontColor = "white", Context = "ListView", TargetItems = "soGioTangCa", Criteria = "duyetTangCa = false")]
     public class GioCong : XPLiteObject
     {
         public GioCong(Session session) : base(session) { }
@@ -472,14 +471,14 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             get { return fSoGioTangCa; }
             set { SetPropertyValue("soGioTangCa", ref fSoGioTangCa, value); }
         }
-        bool? fDuyetTangCa;
-        [XafDisplayName("Duyệt Tăng Ca")]
+        DateTime? fNgayDuyet;
+        [XafDisplayName("Ngay Duyet")]
         [VisibleInDetailView(false)]
         [VisibleInListView(false)]
-        public bool? duyetTangCa
+        public DateTime? ngayDuyet
         {
-            get { return fDuyetTangCa; }
-            set { SetPropertyValue("duyetTangCa", ref fDuyetTangCa, value); }
+            get { return fNgayDuyet; }
+            set { SetPropertyValue("ngayDuyet", ref fNgayDuyet, value); }
         }
         [Association(@"GioCong-CheckInOut")]
         [XafDisplayName("Lần Chấm Công")]
@@ -490,6 +489,9 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         [Association(@"GioCong-LanXinDiTre")]
         [XafDisplayName("Lần Xin Đi Trễ")]
         public XPCollection<LanXinDiTre> lanXinDiTres { get { return GetCollection<LanXinDiTre>("lanXinDiTres"); } }
+        [Association(@"GiocCong-LanBoSungGio")]
+        [XafDisplayName("Lần Bổ Sung Giờ")]
+        public XPCollection<LanBoSungGio> lanBoSungGios { get { return GetCollection<LanBoSungGio>("lanBoSungGios"); } }
         /*
          * Đây là chương trình tính giờ của nhân viên
          * Input: thông tin nhân viên, thời gian vào ca, thời gian ra ca đó, thời gian theo ca làm việc
@@ -503,6 +505,10 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             DateTime vaoHopLe = new DateTime(thoiGianVao.Year, thoiGianVao.Month, thoiGianVao.Day, thoiGianVaoHopLe.Hour, thoiGianVaoHopLe.Minute, 0);
             DateTime raHopLe = new DateTime(thoiGianRa.Year, thoiGianRa.Month, thoiGianRa.Day, thoiGianRaHopLe.Hour, thoiGianRaHopLe.Minute, 0);
             if (DateTime.Compare(thoiGianVao, vaoHopLe) <= 0)
+            {
+                thoiGianVao = vaoHopLe;
+            }
+            else if((thoiGianVao - vaoHopLe).TotalMinutes <= 4)
             {
                 thoiGianVao = vaoHopLe;
             }

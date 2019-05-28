@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <ObjectDataSource Name="nhan vien" ComponentName="dashboardObjectDataSource2">
+      <DataSource Type="QuanLyNhanSu.Module.BusinessObjects.NhanVien, QuanLyNhanSu.Module, Version=1.0.7083.29343, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+    <ObjectDataSource Name="bo sung gio" ComponentName="dashboardObjectDataSource1">
+      <DataSource Type="QuanLyNhanSu.Module.BusinessObjects.LanBoSungGio, QuanLyNhanSu.Module, Version=1.0.7083.29343, Culture=neutral, PublicKeyToken=null" />
+      <CalculatedFields>
+        <CalculatedField Name="Calculated Field 1" Expression="Iif(IsThisYear([thoiGianBoSung]), [thoiGianBoSung], null)" DataType="Auto" />
+      </CalculatedFields>
+    </ObjectDataSource>
+    <ObjectDataSource Name="nghi phep" ComponentName="dashboardObjectDataSource3">
+      <DataSource Type="QuanLyNhanSu.Module.BusinessObjects.LanNghiPhep, QuanLyNhanSu.Module, Version=1.0.7083.29343, Culture=neutral, PublicKeyToken=null" />
+      <CalculatedFields>
+        <CalculatedField Name="Calculated Field 1" Expression="Iif(IsThisYear([ngayNghi]), [ngayNghi], null)" DataType="Auto" />
+      </CalculatedFields>
+    </ObjectDataSource>
+    <ObjectDataSource Name="tangca" ComponentName="dashboardObjectDataSource4">
+      <DataSource Type="QuanLyNhanSu.Module.BusinessObjects.LanTangCa, QuanLyNhanSu.Module, Version=1.0.7083.29343, Culture=neutral, PublicKeyToken=null" />
+      <CalculatedFields>
+        <CalculatedField Name="Calculated Field 1" Expression="Iif(IsThisYear([ngayTangCa]), [ngayTangCa], null)" DataType="Auto" />
+      </CalculatedFields>
+    </ObjectDataSource>
+    <ObjectDataSource Name="di tre ve som" ComponentName="dashboardObjectDataSource5">
+      <DataSource Type="QuanLyNhanSu.Module.BusinessObjects.LanXinDiTre, QuanLyNhanSu.Module, Version=1.0.7083.29343, Culture=neutral, PublicKeyToken=null" />
+      <CalculatedFields>
+        <CalculatedField Name="Calculated Field 1" Expression="Iif(IsThisYear([ngayTaoPhieu]), [ngayTaoPhieu], null)" DataType="Auto" />
+      </CalculatedFields>
+    </ObjectDataSource>
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Bộ Phận Làm Việc" DataSource="dashboardObjectDataSource2" FilterString="[DataItem1] Is Not Null">
+      <ColoringOptions MeasuresColoringMode="Hue" />
+      <DataItems>
+        <Measure DataMember="TenNhanVien" SummaryType="Count" DefaultId="DataItem0" />
+        <Dimension DataMember="boPhan.tenBoPhan" DefaultId="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple Name="Số Nhân Viên">
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem2" Name="Lần Bổ Sung Giờ" DataSource="dashboardObjectDataSource1">
+      <ColoringOptions MeasuresColoringMode="Hue" />
+      <DataItems>
+        <Measure DataMember="nguoiBoSungGio.TenNhanVien" SummaryType="Count" DefaultId="DataItem0" />
+        <Dimension DataMember="Calculated Field 1" DateTimeGroupInterval="Month" DefaultId="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple Name="Số Lần">
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem3" Name="Lần Tăng Ca" DataSource="dashboardObjectDataSource4">
+      <ColoringOptions MeasuresColoringMode="Hue" />
+      <DataItems>
+        <Measure DataMember="nguoiTangCa.TenNhanVien" SummaryType="Count" DefaultId="DataItem1" />
+        <Dimension DataMember="Calculated Field 1" DateTimeGroupInterval="Month" DefaultId="DataItem0" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple Name="Số Lần">
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem4" Name="Lần Nghỉ Phép" DataSource="dashboardObjectDataSource3">
+      <ColoringOptions MeasuresColoringMode="Hue" />
+      <DataItems>
+        <Measure DataMember="nguoiNghiPhep.TenNhanVien" SummaryType="Count" DefaultId="DataItem1" />
+        <Dimension DataMember="Calculated Field 1" DateTimeGroupInterval="Month" DefaultId="DataItem0" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple Name="Số Lần">
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem5" Name="Lần Đi Trễ Về Sớm" DataSource="dashboardObjectDataSource5">
+      <ColoringOptions MeasuresColoringMode="Hue" />
+      <DataItems>
+        <Measure DataMember="nguoiTaoPhieu.TenNhanVien" SummaryType="Count" DefaultId="DataItem1" />
+        <Dimension DataMember="Calculated Field 1" DateTimeGroupInterval="Month" DefaultId="DataItem2" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem2" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple Name="Số Lần">
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+  </Items>
+  <ColorScheme>
+    <Entry DataSource="dashboardObjectDataSource2" Color="-2523878">
+      <MeasureKey>
+        <Definition DataMember="TenNhanVien" SummaryType="Count" />
+      </MeasureKey>
+    </Entry>
+    <Entry DataSource="dashboardObjectDataSource1" Color="-13469247">
+      <MeasureKey>
+        <Definition DataMember="nguoiBoSungGio.TenNhanVien" SummaryType="Count" />
+      </MeasureKey>
+    </Entry>
+    <Entry DataSource="dashboardObjectDataSource4" Color="-14364731">
+      <MeasureKey>
+        <Definition DataMember="nguoiTangCa.TenNhanVien" SummaryType="Count" />
+      </MeasureKey>
+    </Entry>
+    <Entry DataSource="dashboardObjectDataSource3" Color="-3070942">
+      <MeasureKey>
+        <Definition DataMember="nguoiNghiPhep.TenNhanVien" SummaryType="Count" />
+      </MeasureKey>
+    </Entry>
+    <Entry DataSource="dashboardObjectDataSource5" Color="-6139516">
+      <MeasureKey>
+        <Definition DataMember="nguoiTaoPhieu.TenNhanVien" SummaryType="Count" />
+      </MeasureKey>
+    </Entry>
+  </ColorScheme>
+  <LayoutTree>
+    <LayoutGroup Weight="100">
+      <LayoutItem DashboardItem="chartDashboardItem1" Weight="45.729729729729726" />
+      <LayoutGroup Orientation="Vertical" Weight="54.270270270270274">
+        <LayoutGroup Weight="50">
+          <LayoutItem DashboardItem="chartDashboardItem3" Weight="52.589641434262951" />
+          <LayoutItem DashboardItem="chartDashboardItem2" Weight="47.410358565737049" />
+        </LayoutGroup>
+        <LayoutGroup Weight="50">
+          <LayoutItem DashboardItem="chartDashboardItem4" Weight="52.589641434262951" />
+          <LayoutItem DashboardItem="chartDashboardItem5" Weight="47.410358565737049" />
+        </LayoutGroup>
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
