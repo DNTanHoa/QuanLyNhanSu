@@ -24,18 +24,26 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         protected override void OnSaved()
         {
             base.OnSaved();
-            NhanVien nhanVien = Session.FindObject<NhanVien>(new BinaryOperator("MaChamCong", this.MaChamCong));
-            this.nguoiChamCong = nhanVien;
-            Session.CommitTransaction();
+            try
+            {
+                NhanVien nhanVien = Session.FindObject<NhanVien>(new BinaryOperator("MaChamCong", this.MaChamCong));
+                this.nguoiChamCong = nhanVien;
+                Session.CommitTransaction();
+            }
+            catch { }
         }
         protected override void OnLoaded()
         {
             base.OnLoaded();
             if (!Equals(this.MaChamCong, null) && (Equals(this.nguoiChamCong, null)))
             {
-                NhanVien nhanVien = Session.FindObject<NhanVien>(new BinaryOperator("MaChamCong", this.MaChamCong));
-                this.nguoiChamCong = nhanVien;
-                Session.CommitTransaction();
+                try
+                {
+                    NhanVien nhanVien = Session.FindObject<NhanVien>(new BinaryOperator("MaChamCong", this.MaChamCong));
+                    this.nguoiChamCong = nhanVien;
+                    Session.CommitTransaction();
+                }
+                catch { }
             }
         }
         int fId;

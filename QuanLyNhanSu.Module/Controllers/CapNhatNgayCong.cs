@@ -24,9 +24,6 @@ namespace QuanLyNhanSu.Module.Controllers
         public CapNhatNgayCong()
         {
             InitializeComponent();
-            //TargetViewId = "Any";
-            //TargetViewType = ViewType.Any;
-            // Target required Views (via the TargetXXX properties) and create their Actions.
         }
         protected override void OnActivated()
         {

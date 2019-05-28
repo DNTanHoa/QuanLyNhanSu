@@ -58,7 +58,8 @@ namespace QuanLyNhanSu.Module.BusinessObjects
         public enum XinPhep
         {
             [XafDisplayName("Về Sớm")] vesom = 0,
-            [XafDisplayName("Đi Trễ")] ditre = 1
+            [XafDisplayName("Đi Trễ")] ditre = 1,
+            [XafDisplayName("Nghỉ Giữa Giờ")] nghiGiuaGio = 2
         }
         XinPhep fLoaiPhep;
         [XafDisplayName("Loại Phép")]

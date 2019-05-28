@@ -5,10 +5,10 @@
       <Action Id="About Info" Caption="Về Chúng Tôi" />
       <Action Id="Cancel" Caption="Thoát" />
       <Action Id="CancelAction" Caption="Thoát" />
-      <Action Id="ChangePasswordByUser" Caption="Thay Đổi Mật Khẩu Cá Nhân" />
-      <Action Id="ChooseSkin" Caption="Thay Đổi Giao Diện" />
       <Action Id="Close" Caption="Đóng" />
       <Action Id="CopyCellValue" Caption="Sao Chép Nội Dung Ô" Shortcut="CtrlC" />
+      <Action Id="ChangePasswordByUser" Caption="Thay Đổi Mật Khẩu Cá Nhân" />
+      <Action Id="ChooseSkin" Caption="Thay Đổi Giao Diện" />
       <Action Id="Delete" Caption="Xóa" ConfirmationMessage="Bạn Có Chắc Chắn Muốn Xóa" />
       <Action Id="Delete Item" Caption="Xóa Nội Dung" ConfirmationMessage="Bạn Có Chắc Muốn Xóa?" />
       <Action Id="DeleteDashboard" Caption="Xóa Bảng Thống Kê" />
@@ -46,10 +46,7 @@
       <Item Id="Default" Caption="Thông Tin Chung" ImageName="Actions_Home" Index="0">
         <Items>
           <Item Id="CheckInOut_ListView" Removed="True" />
-          <Item Id="GioCong_ListView" Removed="True" />
           <Item Id="MyDetails" Caption="Thông Tin Đăng Nhập" />
-          <Item Id="NgayTinhCong_ListView" Removed="True" />
-          <Item Id="ThangChamCong_ListView" Removed="True" />
         </Items>
       </Item>
       <Item Id="QuanLyNhanVien" Index="1" Caption="Quản Lý Nhân Viên" ImageName="BO_Customer" IsNewNode="True">
@@ -627,8 +624,8 @@
       <Items IsNewNode="True">
         <PropertyEditor Id="boPhan" PropertyName="boPhan" IsNewNode="True" />
         <PropertyEditor Id="caLamViec" PropertyName="caLamViec" IsNewNode="True" />
-        <PropertyEditor Id="chucVuNhanVien" PropertyName="chucVuNhanVien" IsNewNode="True" />
         <PropertyEditor Id="cmnd" PropertyName="cmnd" IsNewNode="True" />
+        <PropertyEditor Id="chucVuNhanVien" PropertyName="chucVuNhanVien" IsNewNode="True" />
         <PropertyEditor Id="daNghiViec" PropertyName="daNghiViec" IsNewNode="True" />
         <PropertyEditor Id="dienThoaiLienLac" PropertyName="dienThoaiLienLac" IsNewNode="True" />
         <PropertyEditor Id="email" PropertyName="email" IsNewNode="True" />
@@ -646,8 +643,8 @@
         <PropertyEditor Id="password" PropertyName="password" IsNewNode="True" />
         <PropertyEditor Id="soNgayPhepConLai" PropertyName="soNgayPhepConLai" IsNewNode="True" />
         <PropertyEditor Id="TenNhanVien" PropertyName="TenNhanVien" IsNewNode="True" />
-        <PropertyEditor Id="thoiGianChamCongs" PropertyName="thoiGianChamCongs" View="NhanVien_thoiGianChamCongs_ListView" IsNewNode="True" />
         <PropertyEditor Id="tinhTrangNv" PropertyName="tinhTrangNv" IsNewNode="True" />
+        <PropertyEditor Id="thoiGianChamCongs" PropertyName="thoiGianChamCongs" View="NhanVien_thoiGianChamCongs_ListView" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
@@ -738,12 +735,14 @@
         <ColumnInfo Id="ngayCapNhat" Index="-1" />
         <ColumnInfo Id="thangChamCong" Index="0" />
       </Columns>
+      <SplitLayout Direction="Horizontal" />
     </ListView>
     <ListView Id="ThangChamCong_ngayTinhCongs_ListView" MasterDetailMode="ListViewAndDetailView" DataAccessMode="DataView">
       <Columns>
         <ColumnInfo Id="loaiTinhCong" SortIndex="0" SortOrder="Ascending" Index="-1" />
         <ColumnInfo Id="ngayChamCong" SortIndex="-1" SortOrder="None" />
       </Columns>
+      <SplitLayout Direction="Horizontal" />
     </ListView>
   </Views>
 </Application>
