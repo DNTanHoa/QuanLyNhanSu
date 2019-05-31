@@ -2,6 +2,5 @@
 using DevExpress.ExpressApp.Mobile.Services;
 
 namespace QuanLyNhanSu.Mobile {
-    public class DataService : MobileDataService<QuanLyNhanSuMobileApplication> {
-	}
+    public class DataService : MobileDataService<QuanLyNhanSuMobileApplication> {}
 }

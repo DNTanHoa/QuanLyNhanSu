@@ -39,6 +39,15 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             get { return fNguoiTangCa; }
             set { SetPropertyValue("nguoiTangCa", ref fNguoiTangCa, value); }
         }
+        DateTime fNgayTao;
+        [XafDisplayName("Ngày Tạo")]
+        [ModelDefault("DisplayFormat", "{0:dd/MM/yyyy}")]
+        [ModelDefault("EditMask", "dd/MM/yyyy")]
+        public DateTime ngayTao
+        {
+            get { return fNgayTao; }
+            set { SetPropertyValue("ngayTao", ref fNgayTao, value); }
+        }
         DateTime fNgayTangCa;
         [XafDisplayName("Ngày Tăng Ca")]
         [ModelDefault("DisplayFormat","{0:dd/MM/yyyy}")]
@@ -120,6 +129,13 @@ namespace QuanLyNhanSu.Module.BusinessObjects
                 }
                 return thoiGian;
             }
+        }
+        string fLyDo;
+        [XafDisplayName("Lý Do")]
+        public string lyDo
+        {
+            get { return fLyDo; }
+            set { SetPropertyValue("lyDo", ref fLyDo, value); }
         }
         string fGhiChu;
         [XafDisplayName("Ghi Chú")]

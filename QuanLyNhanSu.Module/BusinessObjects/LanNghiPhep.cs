@@ -83,6 +83,13 @@ namespace QuanLyNhanSu.Module.BusinessObjects
             get { return fNgayDuyet; }
             set { SetPropertyValue("ngayDuyet", ref fNgayDuyet, value); }
         }
+        string fLyDo;
+        [XafDisplayName("Lý Do")]
+        public string lyDo
+        {
+            get { return fLyDo; }
+            set { SetPropertyValue("lyDo", ref fLyDo, value); }
+        }
         NguoiDung fDuyetBGD;
         [XafDisplayName("Ban Giám Đốc")]
         public NguoiDung duyetBGD
